@@ -10,21 +10,24 @@ namespace GGJ.Scripts
         
         public void Update()
         {
-            if (Input.GetKey(KeyCode.W))
+            if (GetComponent<PhotonView>().AmOwner)
             {
-                transform.position += Vector3.forward * m_speed * Time.deltaTime;
-            }
-            else if (Input.GetKey(KeyCode.A))
-            {
-                transform.position += Vector3.left * m_speed * Time.deltaTime;
-            }
-            else if (Input.GetKey(KeyCode.S))
-            {
-                transform.position += Vector3.back * m_speed * Time.deltaTime;
-            }
-            else if (Input.GetKey(KeyCode.D))
-            {
-                transform.position += Vector3.right * m_speed * Time.deltaTime;
+                if (Input.GetKey(KeyCode.W))
+                {
+                    transform.position += Vector3.forward * m_speed * Time.deltaTime;
+                }
+                else if (Input.GetKey(KeyCode.A))
+                {
+                    transform.position += Vector3.left * m_speed * Time.deltaTime;
+                }
+                else if (Input.GetKey(KeyCode.S))
+                {
+                    transform.position += Vector3.back * m_speed * Time.deltaTime;
+                }
+                else if (Input.GetKey(KeyCode.D))
+                {
+                    transform.position += Vector3.right * m_speed * Time.deltaTime;
+                }   
             }
         }
 
