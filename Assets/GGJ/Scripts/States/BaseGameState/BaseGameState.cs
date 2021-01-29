@@ -24,7 +24,14 @@ public class BaseGameState : FlowStateBase
     public override void OnConnectedToMaster()
     {
         Debug.Log("OnConnectedToMaster() was called by PUN.");
-        PhotonNetwork.JoinRandomRoom();
+
+        RoomOptions options = new RoomOptions()
+        {
+            IsVisible = false,
+            IsOpen = true,
+            MaxPlayers = 6
+        };
+        PhotonNetwork.JoinOrCreateRoom("TestRoom", options, TypedLobby.Default);
     }
 
     public override void OnDisconnected(DisconnectCause cause)
@@ -39,7 +46,7 @@ public class BaseGameState : FlowStateBase
 
     public override void OnJoinedRoom()
     {
-        Debug.Log("On Join Room.");
+        Debug.Log($"Joined room {PhotonNetwork.CurrentRoom.Name}");
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
