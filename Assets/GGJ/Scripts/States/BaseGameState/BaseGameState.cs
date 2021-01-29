@@ -1,26 +1,61 @@
+using System.Collections.Generic;
 using PersonalFramework;
 using Photon.Pun;
+using UnityEngine.Assertions;
 using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
+
 
 public class BaseGameState : FlowStateBase
 {
-    private KeyCodeSet m_inputKeys;
-
-    public BaseGameState()
-    {
-        PhotonNetwork.ConnectUsingSettings();
-    }
-
     protected override void StartPresentingState()
     {
-        m_inputKeys = Resources.Load<InputKeys>("InputKeys").m_keyCodes;
+        bool connected = PhotonNetwork.ConnectUsingSettings();
+        Assert.IsTrue(connected,"Can't Connect to photon!");
     }
 
-    protected override void UpdateActiveState()
+    #region Photon
+    public override void OnConnected()
     {
-        Vector2 input = PlayerMovement.GetPlayerMovement(m_inputKeys);
-        const float movementSpeed = 4.0f;
-        PlayerMovement.MovePlayer(Camera.main.transform, Camera.main.transform, input, movementSpeed, Time.deltaTime);
-        CameraSystem.UpdateCameraRotation(Camera.main.transform);
+        Debug.Log("OnConnected() was called by PUN.");
     }
+
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("OnConnectedToMaster() was called by PUN.");
+        PhotonNetwork.JoinRandomRoom();
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.LogWarning($"Disconnected From Server: {cause}");
+    }
+
+    public override void OnCreatedRoom()
+    {
+        Debug.Log("Room Created.");
+    }
+
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("On Join Room.");
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.Log($"Join Room Failed with code: {returnCode}\n{message}");
+    }
+
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        Debug.Log($"Join Room Failed with code: {returnCode}\n{message}");
+    }
+
+    public override void OnLeftRoom()
+    {
+        Debug.Log("Left Room.");
+    }
+
+    #endregion
 }

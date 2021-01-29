@@ -3,6 +3,10 @@
 /////   James McNeil - 2020
 ////////////////////////////////////////////////////////////
 
+using System.Collections.Generic;
+using Photon.Realtime;
+using UnityEngine;
+
 namespace PersonalFramework
 {
     /// <summary>
@@ -201,6 +205,44 @@ namespace PersonalFramework
         }
 
         protected virtual void FixedDismissingState()
+        {
+        }
+        
+        public virtual void OnConnected() { }
+
+        public virtual void OnConnectedToMaster() { }
+
+        public virtual void OnDisconnected(DisconnectCause cause)
+        {
+        }
+
+        public virtual void OnRegionListReceived(RegionHandler regionHandler) { }
+
+        public virtual void OnCustomAuthenticationResponse(Dictionary<string, object> data) { }
+
+        public virtual void OnCustomAuthenticationFailed(string debugMessage) { }
+        
+        public virtual void OnCreatedRoom()
+        {
+        }
+
+        public virtual void OnCreateRoomFailed(short returnCode, string message)
+        {
+        }
+
+        public virtual void OnJoinedRoom()
+        {
+        }
+
+        public virtual void OnJoinRoomFailed(short returnCode, string message)
+        {
+        }
+
+        public virtual void OnJoinRandomFailed(short returnCode, string message)
+        {
+        }
+
+        public virtual void OnLeftRoom()
         {
         }
     }
