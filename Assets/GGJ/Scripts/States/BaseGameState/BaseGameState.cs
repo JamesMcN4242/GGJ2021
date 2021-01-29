@@ -31,5 +31,31 @@ public class BaseGameState : FlowStateBase
     {
         Debug.LogWarning($"Disconnected From Server: {cause}");
     }
+
+    public override void OnCreatedRoom()
+    {
+        Debug.Log("Room Created.");
+    }
+
+    public override void OnJoinedRoom()
+    {
+        Debug.Log("On Join Room.");
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        Debug.Log($"Join Room Failed with code: {returnCode}\n{message}");
+    }
+
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        Debug.Log($"Join Room Failed with code: {returnCode}\n{message}");
+    }
+
+    public override void OnLeftRoom()
+    {
+        Debug.Log("Left Room.");
+    }
+
     #endregion
 }

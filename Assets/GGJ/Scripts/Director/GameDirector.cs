@@ -5,7 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 
-public class GameDirector : LocalDirector, IConnectionCallbacks
+public class GameDirector : LocalDirector, IConnectionCallbacks, IMatchmakingCallbacks
 {
     [RuntimeInitializeOnLoadMethod]
     private static void StartDirector()
@@ -61,4 +61,38 @@ public class GameDirector : LocalDirector, IConnectionCallbacks
         m_stateController.OnCustomAuthenticationFailed(debugMessage);
     }
     #endregion
+
+    public void OnFriendListUpdate(List<FriendInfo> friendList)
+    {
+    }
+
+    public void OnCreatedRoom()
+    {
+        m_stateController.OnCreatedRoom();
+    }
+
+    public void OnCreateRoomFailed(short returnCode, string message)
+    {
+        m_stateController.OnCreateRoomFailed(returnCode,message);
+    }
+
+    public void OnJoinedRoom()
+    {
+        m_stateController.OnJoinedRoom();
+    }
+
+    public void OnJoinRoomFailed(short returnCode, string message)
+    {
+        m_stateController.OnJoinRandomFailed(returnCode,message);
+    }
+
+    public void OnJoinRandomFailed(short returnCode, string message)
+    {
+        m_stateController.OnJoinRandomFailed(returnCode,message);
+    }
+
+    public void OnLeftRoom()
+    {
+        m_stateController.OnLeftRoom();
+    }
 }

@@ -83,5 +83,41 @@ namespace PersonalFramework
             var state = m_stateStack.Peek();
             state.OnCustomAuthenticationFailed(debugMessage);
         }
+        
+        public virtual void OnCreatedRoom()
+        {
+            var state = m_stateStack.Peek();
+            state.OnCreatedRoom();
+        }
+
+        public virtual void OnCreateRoomFailed(short returnCode, string message)
+        {
+            var state = m_stateStack.Peek();
+            state.OnCreateRoomFailed(returnCode,message);
+        }
+
+        public virtual void OnJoinedRoom()
+        {
+            var state = m_stateStack.Peek();
+            state.OnJoinedRoom();
+        }
+
+        public virtual void OnJoinRoomFailed(short returnCode, string message)
+        {
+            var state = m_stateStack.Peek();
+            state.OnJoinRandomFailed(returnCode,message);
+        }
+
+        public virtual void OnJoinRandomFailed(short returnCode, string message)
+        {
+            var state = m_stateStack.Peek();
+            state.OnJoinRandomFailed(returnCode,message);
+        }
+
+        public virtual void OnLeftRoom()
+        {
+            var state = m_stateStack.Peek();
+            state.OnLeftRoom();
+        }
     }
 }
