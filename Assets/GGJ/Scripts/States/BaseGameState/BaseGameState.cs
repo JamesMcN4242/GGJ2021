@@ -7,20 +7,22 @@ using Photon.Realtime;
 public class BaseGameState : FlowStateBase
 {
     private KeyCodeSet m_inputKeys;
+    private GameObject m_player;
+    private Camera m_playerCamera;
     private PlayerData m_localPlayerData;
     private Vector3 m_cameraRotation;
 
     private bool Connected => m_localPlayerData != null;
 
-    protected override void StartPresentingState()
+    public BaseGameState(GameObject player, Camera playerCamera)
     {
-        bool connected = PhotonNetwork.ConnectUsingSettings();
-        Assert.IsTrue(connected, "Can't Connect to photon!");
+        m_player = player;
+        m_playerCamera = playerCamera;
         m_inputKeys = Resources.Load<InputKeys>("InputKeys").m_keyCodes;
 
         m_cameraRotation = Camera.main.transform.eulerAngles;
     }
-
+    
     protected override void UpdateActiveState()
     {
         if (Connected == false) return;
@@ -34,55 +36,9 @@ public class BaseGameState : FlowStateBase
     }
 
     #region Photon
-    public override void OnConnected()
-    {
-        Debug.Log("OnConnected() was called by PUN.");
-    }
-
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log("OnConnectedToMaster() was called by PUN.");
-
-        RoomOptions options = new RoomOptions()
-        {
-            IsVisible = false,
-            IsOpen = true,
-            MaxPlayers = 6
-        };
-        PhotonNetwork.JoinOrCreateRoom("TestRoom", options, TypedLobby.Default);
-    }
-
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.LogWarning($"Disconnected From Server: {cause}");
-    }
-
-    public override void OnCreatedRoom()
-    {
-        Debug.Log("Room Created.");
-
-        //TODO: Randomly assign this instead of giving it to the first player
-        m_localPlayerData = Resources.Load<PlayerData>("PlayerData/SeekerData");
-    }
-
-    public override void OnJoinedRoom()
-    {
-        Debug.Log($"Joined room {PhotonNetwork.CurrentRoom.Name}");
-
-        var cube = PhotonNetwork.Instantiate("Cube",Vector3.zero,Quaternion.identity);
-        cube.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
-
-        m_localPlayerData ??= Resources.Load<PlayerData>("PlayerData/HiderData");
-    }
-
-    public override void OnJoinRoomFailed(short returnCode, string message)
-    {
-        Debug.Log($"Join Room Failed with code: {returnCode}\n{message}");
-    }
-
-    public override void OnJoinRandomFailed(short returnCode, string message)
-    {
-        Debug.Log($"Join Room Failed with code: {returnCode}\n{message}");
     }
 
     public override void OnLeftRoom()

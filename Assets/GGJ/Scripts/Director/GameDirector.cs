@@ -17,7 +17,7 @@ public class GameDirector : LocalDirector, IConnectionCallbacks, IMatchmakingCal
 
     private void Start()
     {
-        m_stateController.PushState(new BaseGameState());
+        m_stateController.PushState(new ConnectingState());
     }
     
     public virtual void OnEnable()
