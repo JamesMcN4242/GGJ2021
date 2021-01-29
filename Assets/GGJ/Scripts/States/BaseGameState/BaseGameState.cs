@@ -56,6 +56,9 @@ public class BaseGameState : FlowStateBase
     public override void OnJoinedRoom()
     {
         Debug.Log($"Joined room {PhotonNetwork.CurrentRoom.Name}");
+        
+        var cube = PhotonNetwork.Instantiate("Cube",Vector3.zero,Quaternion.identity);
+        cube.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
