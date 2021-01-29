@@ -8,6 +8,8 @@ public class BaseGameState : FlowStateBase
 {
     private KeyCodeSet m_inputKeys;
     private PlayerData m_localPlayerData;
+    private Vector3 m_cameraRotation;
+
     private bool Connected => m_localPlayerData != null;
 
     protected override void StartPresentingState()
@@ -15,6 +17,8 @@ public class BaseGameState : FlowStateBase
         bool connected = PhotonNetwork.ConnectUsingSettings();
         Assert.IsTrue(connected, "Can't Connect to photon!");
         m_inputKeys = Resources.Load<InputKeys>("InputKeys").m_keyCodes;
+
+        m_cameraRotation = Camera.main.transform.eulerAngles;
     }
 
     protected override void UpdateActiveState()
@@ -26,7 +30,7 @@ public class BaseGameState : FlowStateBase
 
         Vector2 input = PlayerMovement.GetPlayerMovement(m_inputKeys);
         PlayerMovement.MovePlayer(playerTransform, Camera.main.transform, input, m_localPlayerData.m_playerSpeed, Time.deltaTime);
-        CameraSystem.UpdateCameraRotation(Camera.main.transform);
+        CameraSystem.UpdateCameraRotation(Camera.main.transform, ref m_cameraRotation);
     }
 
     #region Photon

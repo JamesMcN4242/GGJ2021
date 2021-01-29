@@ -12,4 +12,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7864c1998838364cb18593db1aa65b5, type: 3}
   m_Name: HiderData
   m_EditorClassIdentifier: 
-  m_playerSpeed: 0
+  m_playerSpeed: 6.6
