@@ -1,18 +1,27 @@
-using System.Collections.Generic;
 using PersonalFramework;
 using Photon.Pun;
 using UnityEngine.Assertions;
 using UnityEngine;
-using Photon.Pun;
 using Photon.Realtime;
-
 
 public class BaseGameState : FlowStateBase
 {
+    private KeyCodeSet m_inputKeys;
+
     protected override void StartPresentingState()
     {
         bool connected = PhotonNetwork.ConnectUsingSettings();
-        Assert.IsTrue(connected,"Can't Connect to photon!");
+        Assert.IsTrue(connected, "Can't Connect to photon!");
+        m_inputKeys = Resources.Load<InputKeys>("InputKeys").m_keyCodes;
+    }
+
+    protected override void UpdateActiveState()
+    {
+        const float movementSpeed = 8.0f;
+
+        Vector2 input = PlayerMovement.GetPlayerMovement(m_inputKeys);
+        PlayerMovement.MovePlayer(Camera.main.transform, Camera.main.transform, input, movementSpeed, Time.deltaTime);
+        CameraSystem.UpdateCameraRotation(Camera.main.transform);
     }
 
     #region Photon
