@@ -7,6 +7,8 @@ using Photon.Realtime;
 public class BaseGameState : FlowStateBase
 {
     private KeyCodeSet m_inputKeys;
+    private PlayerData m_localPlayerData;
+    private bool Connected => m_localPlayerData != null;
 
     protected override void StartPresentingState()
     {
@@ -17,10 +19,13 @@ public class BaseGameState : FlowStateBase
 
     protected override void UpdateActiveState()
     {
-        const float movementSpeed = 8.0f;
+        if (Connected == false) return;
+
+        //Todo: Update to our local device's cube object
+        Transform playerTransform = Camera.main.transform;
 
         Vector2 input = PlayerMovement.GetPlayerMovement(m_inputKeys);
-        PlayerMovement.MovePlayer(Camera.main.transform, Camera.main.transform, input, movementSpeed, Time.deltaTime);
+        PlayerMovement.MovePlayer(playerTransform, Camera.main.transform, input, m_localPlayerData.m_playerSpeed, Time.deltaTime);
         CameraSystem.UpdateCameraRotation(Camera.main.transform);
     }
 
@@ -51,14 +56,19 @@ public class BaseGameState : FlowStateBase
     public override void OnCreatedRoom()
     {
         Debug.Log("Room Created.");
+
+        //TODO: Randomly assign this instead of giving it to the first player
+        m_localPlayerData = Resources.Load<PlayerData>("PlayerData/SeekerData");
     }
 
     public override void OnJoinedRoom()
     {
         Debug.Log($"Joined room {PhotonNetwork.CurrentRoom.Name}");
-        
+
         var cube = PhotonNetwork.Instantiate("Cube",Vector3.zero,Quaternion.identity);
         cube.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
+
+        m_localPlayerData ??= Resources.Load<PlayerData>("PlayerData/HiderData");
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
