@@ -1,5 +1,35 @@
+using System.Collections.Generic;
 using PersonalFramework;
+using Photon.Pun;
+using UnityEngine.Assertions;
+using UnityEngine;
+using Photon.Pun;
+using Photon.Realtime;
+
 
 public class BaseGameState : FlowStateBase
 {
+    protected override void StartPresentingState()
+    {
+        bool connected = PhotonNetwork.ConnectUsingSettings();
+        Assert.IsTrue(connected,"Can't Connect to photon!");
+    }
+
+    #region Photon
+    public override void OnConnected()
+    {
+        Debug.Log("OnConnected() was called by PUN.");
+    }
+
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("OnConnectedToMaster() was called by PUN.");
+        PhotonNetwork.JoinRandomRoom();
+    }
+
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        Debug.LogWarning($"Disconnected From Server: {cause}");
+    }
+    #endregion
 }

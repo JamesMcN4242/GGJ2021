@@ -4,6 +4,7 @@
 ////////////////////////////////////////////////////////////
 
 using System.Collections.Generic;
+using Photon.Realtime;
 using UnityEngine;
 
 namespace PersonalFramework
@@ -45,6 +46,42 @@ namespace PersonalFramework
                 FlowStateBase state = m_stateStack.Peek();
                 state.FixedUpdateState();
             }
+        }
+        
+        public virtual void OnConnected()
+        {
+            var state = m_stateStack.Peek();
+            state.OnConnected();
+        }
+
+        public virtual void OnConnectedToMaster()
+        {
+            var state = m_stateStack.Peek();
+            state.OnConnectedToMaster();
+        }
+
+        public virtual void OnDisconnected(DisconnectCause cause)
+        {
+            var state = m_stateStack.Peek();
+            state.OnDisconnected(cause);
+        }
+
+        public virtual void OnRegionListReceived(RegionHandler regionHandler)
+        {
+            var state = m_stateStack.Peek();
+            state.OnRegionListReceived(regionHandler);
+        }
+
+        public virtual void OnCustomAuthenticationResponse(Dictionary<string, object> data)
+        {
+            var state = m_stateStack.Peek();
+            state.OnCustomAuthenticationResponse(data);
+        }
+
+        public virtual void OnCustomAuthenticationFailed(string debugMessage)
+        {
+            var state = m_stateStack.Peek();
+            state.OnCustomAuthenticationFailed(debugMessage);
         }
     }
 }
