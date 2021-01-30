@@ -24,4 +24,10 @@ public static class SpawnSystem
             }
         }
     }
+
+    public static void SpawnSeeker()
+    {
+        SeekerSpawnerMono spawnPosition = GameObject.FindObjectOfType<SeekerSpawnerMono>();
+        PhotonNetwork.Instantiate("Seeker", spawnPosition.transform.position, Quaternion.identity);
+    }
 }

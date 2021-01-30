@@ -78,6 +78,23 @@ public static class PlayerMovement
         return 1.0f;
     }
 
+    public static Vector3 GetCurrentHeight(MovementState movementType, PlayerData playerData)
+    {
+        switch (movementType)
+        {
+            case MovementState.CROUCHING:
+                return playerData.m_crouchSize;
+
+            case MovementState.RUNNING:
+            case MovementState.WALKING:
+                return playerData.m_standingSize;
+
+            default:
+                Debug.LogError("Movement state not valid");
+                return Vector3.one;
+        }
+    }
+
     private static (float movementSpeed, Vector3 playerSize) GetCurrentPlayerSpeedAndSize(MovementState movementType, PlayerData playerData)
     {
         switch (movementType)

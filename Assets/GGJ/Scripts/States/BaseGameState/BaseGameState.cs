@@ -10,6 +10,7 @@ public class BaseGameState : FlowStateBase
     private PositionMono m_positionMono;
     private PlayerData m_localPlayerData;
     private PlayerMovement.MovementState m_playerMovementState;
+    private PowerUpData m_powerUpData;
 
     private Vector3 m_cameraRotation;
     private bool Connected => m_player != null;
