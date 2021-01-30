@@ -7,6 +7,7 @@ public class BaseGameState : FlowStateBase
     private KeyCodeSet m_inputKeys;
     private Transform m_player;
     private Transform m_playerCamera;
+    private PositionMono m_positionMono;
     private PlayerData m_localPlayerData;
     private PlayerMovement.MovementState m_playerMovementState;
 
@@ -18,6 +19,8 @@ public class BaseGameState : FlowStateBase
         m_player = player.transform;
         m_playerCamera = playerCamera.transform;
         m_inputKeys = InputKeyManagement.GetSavedOrDefaultKeyCodes();
+
+        m_positionMono = player.GetComponent<PositionMono>();
 
         m_cameraRotation = m_playerCamera.eulerAngles;
 
@@ -32,7 +35,7 @@ public class BaseGameState : FlowStateBase
         Vector2 input = PlayerMovement.GetPlayerMovement(m_inputKeys);
         m_playerMovementState = PlayerMovement.GetMovementState(m_playerMovementState, m_inputKeys);
 
-        PlayerMovement.MovePlayer(m_player, m_playerCamera, input, m_localPlayerData, m_playerMovementState, Time.deltaTime);
+        PlayerMovement.MovePlayer(m_player, m_playerCamera, input, m_localPlayerData, m_playerMovementState, m_positionMono, Time.deltaTime);
         CameraSystem.UpdateCameraRotation(m_playerCamera, ref m_cameraRotation);
     }
 

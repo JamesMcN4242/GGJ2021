@@ -34,29 +34,31 @@ public static class PlayerMovement
         return input;
     }
 
-    public static void MovePlayer(Transform player, Transform facingDirection, Vector2 movement, PlayerData playerData, MovementState movementType, float deltaTime)
+    public static void MovePlayer(Transform player, Transform facingDirection, Vector2 movement, PlayerData playerData, MovementState movementType, PositionMono posMono, float deltaTime)
     {
         Vector3 newPos = player.position;
 
         (float movementSpeed, Vector3 playerSize) = GetCurrentPlayerSpeedAndSize(movementType, playerData);
         float movementModifier = GetEnvironmentSpeedModifiers(player, playerSize);
-        float moveDistance = deltaTime * movementSpeed * movementModifier;
 
-        Vector3 forward = facingDirection.forward;
+        Vector3 forward = facingDirection.forward * movement.x;
         forward.y = 0.0f;
 
-        Vector3 right = facingDirection.right;
+        Vector3 right = facingDirection.right * movement.y;
         right.y = 0.0f;
 
-        newPos += moveDistance * right * movement.x;
-        newPos += moveDistance * forward * movement.y;
+        Vector3 velocity = (forward + right).normalized * movementSpeed * movementModifier;
+
+        newPos += velocity * deltaTime;
 
         //We'd be in a physical object - don't want to move here
         if (Physics.CheckBox(newPos, playerSize * 0.5f, player.rotation, int.MaxValue, QueryTriggerInteraction.Ignore))
         {
+            posMono.m_velocity = Vector3.zero;
             return;
         }
 
+        posMono.m_velocity = velocity;
         player.position = newPos;
     }
 
