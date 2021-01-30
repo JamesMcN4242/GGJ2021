@@ -52,7 +52,7 @@ public static class PlayerMovement
         newPos += velocity * deltaTime;
 
         //We'd be in a physical object - don't want to move here
-        if (Physics.CheckBox(newPos, playerSize * 0.5f, player.rotation, int.MaxValue, QueryTriggerInteraction.Ignore))
+        if (Physics.CheckBox(newPos, playerSize * 0.5f, player.rotation, ~LayerMask.GetMask("Player"), QueryTriggerInteraction.Ignore))
         {
             posMono.m_velocity = Vector3.zero;
             return;
