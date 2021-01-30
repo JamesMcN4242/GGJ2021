@@ -61,12 +61,7 @@ public class ConnectingState : FlowStateBase
         };
         PhotonNetwork.JoinOrCreateRoom("TestRoom", options, TypedLobby.Default);
     }
-
-    public override void OnDisconnected(DisconnectCause cause)
-    {
-        Debug.LogWarning($"Disconnected From Server: {cause}");
-    }
-
+    
     public override void OnCreatedRoom()
     {
         Debug.Log("Room Created.");
@@ -94,17 +89,30 @@ public class ConnectingState : FlowStateBase
 
     public override void OnJoinRoomFailed(short returnCode, string message)
     {
-        Debug.Log($"Join Room Failed with code: {returnCode}\n{message}");
+        string msg = $"Join Room Failed with code: {returnCode}\n{message}";
+        Debug.Log(msg);
+        ControllingStateStack.ChangeState(new ErrorState(msg));
     }
 
     public override void OnJoinRandomFailed(short returnCode, string message)
     {
-        Debug.Log($"Join Room Failed with code: {returnCode}\n{message}");
+        string msg = $"Join Room Failed with code: {returnCode}\n{message}";
+        Debug.Log(msg);
+        ControllingStateStack.ChangeState(new ErrorState(msg));;
     }
 
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        string msg = $"Disconnected From Server: {cause}";
+        Debug.Log(msg);
+        ControllingStateStack.ChangeState(new ErrorState(msg));
+    }
+    
     public override void OnLeftRoom()
     {
-        Debug.Log("Left Room.");
+        string msg = $"Error: Unexpectedly Left Room: {PhotonNetwork.CurrentRoom.Name}.";
+        Debug.Log(msg);
+        ControllingStateStack.ChangeState(new ErrorState(msg));
     }
 
     #endregion

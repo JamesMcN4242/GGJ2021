@@ -29,6 +29,7 @@ public class MainMenuState : FlowStateBase
                     EndActiveState();
                     break;
                 case "QUIT":
+                    Debug.Log("Application Quit!");
                     Application.Quit();
                     break;
             }
