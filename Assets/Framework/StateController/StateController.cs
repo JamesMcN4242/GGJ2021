@@ -12,6 +12,7 @@ namespace PersonalFramework
     public class StateController
     {
         private Stack<FlowStateBase> m_stateStack = new Stack<FlowStateBase>();
+        private FlowStateBase m_nextState;
 
         public void PushState(FlowStateBase state)
         {
@@ -26,6 +27,12 @@ namespace PersonalFramework
             m_stateStack.Peek().EndActiveState();
         }
 
+        public void ChangeState(FlowStateBase state)
+        {
+            m_nextState = state;
+            m_stateStack.Peek().EndActiveState();
+        }
+
         public void UpdateStack()
         {
             if (m_stateStack.Count > 0)
@@ -35,6 +42,11 @@ namespace PersonalFramework
                 if (state.IsDismissed())
                 {
                     m_stateStack.Pop();
+                    if (m_nextState != null)
+                    {
+                        PushState(m_nextState);
+                        m_nextState = null;
+                    }
                 }
             }
         }
