@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PowerUpSpawnContent
   m_EditorClassIdentifier: 
   m_powerUpsToSpawn:
-  - m_powerUpType: 0
+  - m_powerUpType: 2
     m_powerUpPrefabPath: PowerUpPrefabs/SpeedBoostPowerUp
     m_numberToSpawn: 1
   - m_powerUpType: 1
