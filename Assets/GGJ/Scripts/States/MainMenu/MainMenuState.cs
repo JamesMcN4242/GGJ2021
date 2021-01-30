@@ -7,7 +7,7 @@ public class MainMenuState : FlowStateBase
 {
     private UIMainMenu m_uiMainMenu;
     private float k_maxFadeTime = 1;
-    private float m_remainingTime = 0;
+    private float m_currentTime = 0;
     private Image m_curtain;
     
     protected override bool AquireUIFromScene()
@@ -20,27 +20,30 @@ public class MainMenuState : FlowStateBase
 
     protected override void HandleMessage(object message)
     {
-        if (message is string msg)
+        if (CurrentStatus == Status.ACTIVE)
         {
-            switch (msg)
+            if (message is string msg)
             {
-                case "START":
-                    m_remainingTime = k_maxFadeTime;
-                    EndActiveState();
-                    break;
-                case "QUIT":
-                    Debug.Log("Application Quit!");
-                    Application.Quit();
-                    break;
-            }
+                switch (msg)
+                {
+                    case "START":
+                        m_currentTime = 0;
+                        EndActiveState();
+                        break;
+                    case "QUIT":
+                        Debug.Log("Application Quit!");
+                        Application.Quit();
+                        break;
+                }
+            }   
         }
     }
 
     protected override void UpdateDismissingState()
     {
-        m_remainingTime -= Time.deltaTime;
-        m_uiMainMenu.SetCurtainAlpha(Mathf.Clamp01(m_remainingTime / k_maxFadeTime));
-        if (m_remainingTime < 0)
+        m_currentTime += Time.deltaTime;
+        m_uiMainMenu.SetCurtainAlpha(Mathf.Clamp01(m_currentTime / k_maxFadeTime));
+        if (m_currentTime > k_maxFadeTime)
         {
             EndDismissingState();
             SceneManager.LoadScene("Game");
