@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
 using PersonalFramework;
@@ -94,5 +95,10 @@ public class GameDirector : LocalDirector, IConnectionCallbacks, IMatchmakingCal
     public void OnLeftRoom()
     {
         m_stateController.OnLeftRoom();
+    }
+
+    private void OnApplicationQuit()
+    {
+        PhotonNetwork.RemoveCallbackTarget(this);
     }
 }

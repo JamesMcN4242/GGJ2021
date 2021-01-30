@@ -40,6 +40,8 @@ public class BaseGameState : FlowStateBase
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.LogWarning($"Disconnected From Server: {cause}");
+        m_playerCamera.SetParent(null);
+        ControllingStateStack.ChangeState(new ErrorState($"Disconnected from the server MSG: {cause}."));
     }
 
     public override void OnLeftRoom()

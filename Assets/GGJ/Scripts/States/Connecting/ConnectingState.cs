@@ -14,7 +14,7 @@ public class ConnectingState : FlowStateBase
     
     protected override bool AquireUIFromScene()
     {
-        m_uiConnecting = GameObject.Find("Connecting").GetComponent<UIConnecting>();
+        m_uiConnecting = GameObject.Find("UIConnecting").GetComponent<UIConnecting>();
         m_ui = m_uiConnecting;
         return true;
     }

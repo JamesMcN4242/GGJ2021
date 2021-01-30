@@ -2132,10 +2132,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 157636452230795693, guid: 9cfc7ee9dc014f641921dae1be5b8dec, type: 3}
-      propertyPath: m_AdditionalShaderChannelsFlag
-      value: 25
-      objectReference: {fileID: 0}
     - target: {fileID: 2746500080213892793, guid: 9cfc7ee9dc014f641921dae1be5b8dec, type: 3}
       propertyPath: m_Name
       value: Canvas

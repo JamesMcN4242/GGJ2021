@@ -1,8 +1,6 @@
-﻿using System;
-using System.Text;
+﻿using System.Text;
 using PersonalFramework;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
 
 public class UIConnecting : UIStateBase
 {
