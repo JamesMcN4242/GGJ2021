@@ -33,6 +33,8 @@ public class BaseGameState : FlowStateBase
 
     protected override void StartActiveState()
     {
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
         m_teleportManager.Initialise(m_positionMono);
     }
 
@@ -48,6 +50,15 @@ public class BaseGameState : FlowStateBase
         PlayerMovement.MovePlayer(m_player, m_playerCameraTrans, input, m_localPlayerData, m_playerMovementState, m_positionMono, speedModifier, deltaTime);
         CameraSystem.UpdateCameraRotation(m_playerCameraTrans, ref m_cameraRotation);
         UpdatePowerUps(deltaTime);
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            var prefab = Resources.Load<GameObject>("Ball");
+            var ball = GameObject.Instantiate(prefab);
+            ball.transform.position = m_player.position + Vector3.up + m_playerCamera.transform.forward * 1.5f;
+            ball.GetComponent<Rigidbody>().AddForce(m_playerCamera.transform.forward * 125);
+        }
+        
     }
 
     private void UpdatePowerUps(float deltaTime)
