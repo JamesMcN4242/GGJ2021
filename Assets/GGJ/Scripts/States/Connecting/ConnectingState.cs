@@ -10,7 +10,15 @@ public class ConnectingState : FlowStateBase
     private Image m_curtain;
     private float m_remainingTime;
     private float m_maxFadeTime = 1;
+    private UIConnecting m_uiConnecting;
     
+    protected override bool AquireUIFromScene()
+    {
+        m_uiConnecting = GameObject.Find("Connecting").GetComponent<UIConnecting>();
+        m_ui = m_uiConnecting;
+        return true;
+    }
+
     protected override void StartPresentingState()
     {
         bool connected = PhotonNetwork.ConnectUsingSettings();
@@ -18,6 +26,11 @@ public class ConnectingState : FlowStateBase
         m_curtain = GameObject.Find("Curtain").GetComponent<Image>();
         m_curtain.color = Color.black;
         EndPresentingState();
+    }
+
+    protected override void UpdateActiveState()
+    {
+        m_uiConnecting.UpdateText();
     }
 
     protected override void UpdateDismissingState()
