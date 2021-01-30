@@ -1,6 +1,7 @@
 ﻿using PersonalFramework;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class ErrorState : FlowStateBase
 {
@@ -34,7 +35,8 @@ public class ErrorState : FlowStateBase
                 case "RECONNECT":
                     ControllingStateStack.ChangeState(new ConnectingState());
                     break;
-                case "EXIT_TO_MENU":
+                case "TO_MENU":
+                    SceneManager.LoadScene("MainMenu");
                     break;
             }
         }

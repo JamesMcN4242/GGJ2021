@@ -1,21 +1,10 @@
-using System;
 using System.Collections.Generic;
-using System.Text.RegularExpressions;
 using PersonalFramework;
 using Photon.Pun;
 using Photon.Realtime;
-using UnityEngine;
 
 public class GameDirector : LocalDirector, IConnectionCallbacks, IMatchmakingCallbacks
 {
-    [RuntimeInitializeOnLoadMethod]
-    private static void StartDirector()
-    {
-        GameObject director = new GameObject("GameDirector");
-        GameDirector gameDirector = director.AddComponent<GameDirector>();
-        DontDestroyOnLoad(director);
-    }
-
     private void Start()
     {
         m_stateController.PushState(new ConnectingState());
