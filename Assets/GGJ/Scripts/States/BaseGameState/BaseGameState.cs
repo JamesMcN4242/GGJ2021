@@ -10,6 +10,7 @@ public class BaseGameState : FlowStateBase
     private PositionMono m_positionMono;
     private PlayerData m_localPlayerData;
     private PlayerMovement.MovementState m_playerMovementState;
+    private TeleportManager m_teleportManager = new TeleportManager();
     private PowerUpData m_powerUpData;
 
     private Vector3 m_cameraRotation;
@@ -28,7 +29,12 @@ public class BaseGameState : FlowStateBase
         //TODO: Decide if seeker or hider
         m_localPlayerData = Resources.Load<PlayerData>("PlayerData/HiderData");
     }
-    
+
+    protected override void StartActiveState()
+    {
+        m_teleportManager.Initialise(m_positionMono);
+    }
+
     protected override void UpdateActiveState()
     {
         if (Connected == false) return;
