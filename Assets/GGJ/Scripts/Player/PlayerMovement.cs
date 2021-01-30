@@ -39,7 +39,8 @@ public static class PlayerMovement
         Vector3 newPos = player.position;
 
         (float movementSpeed, Vector3 playerSize) = GetCurrentPlayerSpeedAndSize(movementType, playerData);
-        float moveDistance = deltaTime * movementSpeed;
+        float movementModifier = GetEnvironmentSpeedModifiers(player, playerSize);
+        float moveDistance = deltaTime * movementSpeed * movementModifier;
 
         Vector3 forward = facingDirection.forward;
         forward.y = 0.0f;
@@ -50,14 +51,31 @@ public static class PlayerMovement
         newPos += moveDistance * right * movement.x;
         newPos += moveDistance * forward * movement.y;
 
-        if (Physics.CheckBox(newPos, playerSize * 0.5f, player.rotation, int.MaxValue))
+        //We'd be in a physical object - don't want to move here
+        if (Physics.CheckBox(newPos, playerSize * 0.5f, player.rotation, int.MaxValue, QueryTriggerInteraction.Ignore))
         {
             return;
         }
 
         player.position = newPos;
     }
-    
+
+    private static float GetEnvironmentSpeedModifiers(Transform player, Vector3 playerSize)
+    {
+        Collider[] colliders = Physics.OverlapBox(player.position, playerSize, player.rotation, int.MaxValue, QueryTriggerInteraction.Collide);
+        foreach(Collider col in colliders)
+        {
+            Trap trap = col.GetComponent<Trap>();
+            switch(trap)
+            {
+                case SlowTrap slowtrap when trap is SlowTrap:
+                    return slowtrap.m_speedPercentageInTrap;
+            }
+        }
+
+        return 1.0f;
+    }
+
     private static (float movementSpeed, Vector3 playerSize) GetCurrentPlayerSpeedAndSize(MovementState movementType, PlayerData playerData)
     {
         switch (movementType)
