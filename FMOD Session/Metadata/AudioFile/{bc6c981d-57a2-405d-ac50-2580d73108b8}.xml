@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{bc6c981d-57a2-405d-ac50-2580d73108b8}">
+		<property name="assetPath">
+			<value>SFX/Smoke Trap.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>4.5319727891156463</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e20ea6a2-50c6-4bff-95e5-dcd4a6c89afa}</destination>
+		</relationship>
+	</object>
+</objects>

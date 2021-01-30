@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="AudioFile" id="{1032a09e-7222-4618-831d-154c0c64e9cb}">
+		<property name="assetPath">
+			<value>DX/Too bad.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>1.4040136054421768</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e20ea6a2-50c6-4bff-95e5-dcd4a6c89afa}</destination>
+		</relationship>
+	</object>
+</objects>

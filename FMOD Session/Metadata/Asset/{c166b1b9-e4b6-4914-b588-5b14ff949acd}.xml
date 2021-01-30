@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.01.00">
+	<object class="EncodableAsset" id="{c166b1b9-e4b6-4914-b588-5b14ff949acd}">
+		<property name="assetPath">
+			<value>FLY/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{e20ea6a2-50c6-4bff-95e5-dcd4a6c89afa}</destination>
+		</relationship>
+	</object>
+</objects>
