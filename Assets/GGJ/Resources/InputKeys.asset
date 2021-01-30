@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: InputKeys
   m_EditorClassIdentifier: 
   m_keyCodes:
-    m_upKeyCode: 119
-    m_downKeyCode: 115
-    m_leftKeyCode: 97
-    m_rightKeyCode: 100
+    m_upKey: 119
+    m_downKey: 115
+    m_leftKey: 97
+    m_rightKey: 100
+    m_crouchToggleKey: 306

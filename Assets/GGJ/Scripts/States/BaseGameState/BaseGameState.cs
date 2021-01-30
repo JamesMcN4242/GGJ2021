@@ -8,17 +8,16 @@ public class BaseGameState : FlowStateBase
     private Transform m_player;
     private Transform m_playerCamera;
     private PlayerData m_localPlayerData;
-    private bool m_playerCrouching;
+    private PlayerMovement.MovementState m_playerMovementState;
 
     private Vector3 m_cameraRotation;
-
     private bool Connected => m_player != null;
 
     public BaseGameState(GameObject player, Camera playerCamera)
     {
         m_player = player.transform;
         m_playerCamera = playerCamera.transform;
-        m_inputKeys = Resources.Load<InputKeys>("InputKeys").m_keyCodes;
+        m_inputKeys = InputKeyManagement.GetSavedOrDefaultKeyCodes();
 
         m_cameraRotation = m_playerCamera.eulerAngles;
 
@@ -31,7 +30,9 @@ public class BaseGameState : FlowStateBase
         if (Connected == false) return;
 
         Vector2 input = PlayerMovement.GetPlayerMovement(m_inputKeys);
-        PlayerMovement.MovePlayer(m_player, m_playerCamera, input, m_localPlayerData, m_playerCrouching, Time.deltaTime);
+        m_playerMovementState = PlayerMovement.GetMovementState(m_playerMovementState, m_inputKeys);
+
+        PlayerMovement.MovePlayer(m_player, m_playerCamera, input, m_localPlayerData, m_playerMovementState, Time.deltaTime);
         CameraSystem.UpdateCameraRotation(m_playerCamera, ref m_cameraRotation);
     }
 
