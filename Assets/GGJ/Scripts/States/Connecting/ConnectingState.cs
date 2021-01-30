@@ -36,7 +36,7 @@ public class ConnectingState : FlowStateBase
     protected override void UpdateDismissingState()
     {
         m_remainingTime -= Time.deltaTime;
-        m_curtain.color = new Color(0, 0, 0, m_remainingTime / m_maxFadeTime);
+        m_curtain.color = new Color(0, 0, 0, Mathf.Clamp01(m_remainingTime / m_maxFadeTime));
         if (m_remainingTime < 0)
         {
             EndDismissingState();
