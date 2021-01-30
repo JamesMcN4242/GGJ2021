@@ -56,7 +56,7 @@ public class BaseGameState : FlowStateBase
             var prefab = Resources.Load<GameObject>("Ball");
             var ball = GameObject.Instantiate(prefab);
             ball.transform.position = m_player.position + Vector3.up + m_playerCamera.transform.forward * 1.5f;
-            ball.GetComponent<Rigidbody>().AddForce(m_playerCamera.transform.forward * 125);
+            ball.GetComponent<Rigidbody>().AddForce(m_playerCamera.transform.forward * 150);
         }
         
     }

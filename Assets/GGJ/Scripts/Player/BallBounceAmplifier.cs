@@ -12,6 +12,6 @@ public class BallBounceAmplifier : MonoBehaviour
     private void OnCollisionEnter(Collision other)
     {
         Debug.Log("Bounce!");
-        m_rigidbody.AddForce(Vector3.up * 2.5f);
+        m_rigidbody.AddForce(Vector3.up * 2.75f);
     }
 }
