@@ -10,6 +10,7 @@ public class BaseGameState : FlowStateBase
     private Transform m_player;
     private Transform m_playerCamera;
     private PlayerData m_localPlayerData;
+    private bool m_playerCrouching;
 
     private Vector3 m_cameraRotation;
 
@@ -32,7 +33,7 @@ public class BaseGameState : FlowStateBase
         if (Connected == false) return;
 
         Vector2 input = PlayerMovement.GetPlayerMovement(m_inputKeys);
-        PlayerMovement.MovePlayer(m_player, m_playerCamera, input, m_localPlayerData.m_playerSpeed, Time.deltaTime);
+        PlayerMovement.MovePlayer(m_player, m_playerCamera, input, m_localPlayerData, m_playerCrouching, Time.deltaTime);
         CameraSystem.UpdateCameraRotation(m_playerCamera, ref m_cameraRotation);
     }
 

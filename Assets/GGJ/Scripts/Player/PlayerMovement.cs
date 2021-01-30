@@ -15,9 +15,10 @@ public static class PlayerMovement
         return input;
     }
 
-    public static void MovePlayer(Transform player, Transform facingDirection, Vector2 movement, float movementSpeed, float deltaTime)
+    public static void MovePlayer(Transform player, Transform facingDirection, Vector2 movement, PlayerData playerData, bool crouching, float deltaTime)
     {
         Vector3 newPos = player.position;
+        float movementSpeed = crouching ? playerData.m_playerSpeed : playerData.m_crouchSpeed;
         float moveDistance = deltaTime * movementSpeed;
 
         Vector3 forward = facingDirection.forward;
@@ -28,7 +29,13 @@ public static class PlayerMovement
 
         newPos += moveDistance * right * movement.x;
         newPos += moveDistance * forward * movement.y;
+
+        if (Physics.CheckBox(newPos, (crouching ? playerData.m_playerSize : playerData.m_crouchSize) * 0.5f, player.rotation, int.MaxValue))
+        {
+            return;
+        }
+
         player.position = newPos;
     }
-
+    
 }
