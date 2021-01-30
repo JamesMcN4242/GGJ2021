@@ -65,6 +65,7 @@ public class ConnectingState : FlowStateBase
     public override void OnCreatedRoom()
     {
         Debug.Log("Room Created.");
+        SpawnSystem.SpawnPowerUps();
     }
 
     public override void OnJoinedRoom()
