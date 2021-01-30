@@ -29,8 +29,8 @@ public class PositionMono : MonoBehaviour, IPunObservable
             Vector3 position = (Vector3)stream.ReceiveNext();
             m_velocity = (Vector3) stream.ReceiveNext();
 
-            m_start = m_end;
-            m_lag = Mathf.Abs((float) (PhotonNetwork.Time - info.SentServerTime));
+            m_start = transform.position;
+            m_lag = Mathf.Abs((float) (PhotonNetwork.Time - info.SentServerTime)) * 2f;
             m_end = position + m_velocity * m_lag;
             m_currentTime = 0;
         }
