@@ -14,8 +14,10 @@ namespace PersonalFramework
     /// </summary>
     public abstract class FlowStateBase
     {
-        private enum Status { START_PRESENTING, PRESENTING, START_ACTIVE, ACTIVE, START_DISMISSING, DISMISSING, DISMISSED };
+        public enum Status { START_PRESENTING, PRESENTING, START_ACTIVE, ACTIVE, START_DISMISSING, DISMISSING, DISMISSED };
         private Status m_status = Status.START_PRESENTING;
+        protected Status CurrentStatus => m_status;
+
         protected UIStateBase m_ui = null;
         private Observer m_messageObserver = new Observer();
         

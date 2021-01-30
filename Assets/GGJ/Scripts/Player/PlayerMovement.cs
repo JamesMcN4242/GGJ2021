@@ -34,30 +34,67 @@ public static class PlayerMovement
         return input;
     }
 
-    public static void MovePlayer(Transform player, Transform facingDirection, Vector2 movement, PlayerData playerData, MovementState movementType, float deltaTime)
+    public static void MovePlayer(Transform player, Transform facingDirection, Vector2 input, PlayerData playerData, MovementState movementType, PositionMono posMono, float powerupModifier, float deltaTime)
     {
         Vector3 newPos = player.position;
 
         (float movementSpeed, Vector3 playerSize) = GetCurrentPlayerSpeedAndSize(movementType, playerData);
-        float moveDistance = deltaTime * movementSpeed;
+        float movementModifier = GetEnvironmentSpeedModifiers(player, playerSize);
 
-        Vector3 forward = facingDirection.forward;
+        Vector3 forward = facingDirection.forward * input.y;
         forward.y = 0.0f;
 
-        Vector3 right = facingDirection.right;
+        Vector3 right = facingDirection.right * input.x;
         right.y = 0.0f;
 
-        newPos += moveDistance * right * movement.x;
-        newPos += moveDistance * forward * movement.y;
+        Vector3 velocity = (forward + right).normalized * movementSpeed * movementModifier * powerupModifier;
 
-        if (Physics.CheckBox(newPos, playerSize * 0.5f, player.rotation, int.MaxValue))
+        newPos += velocity * deltaTime;
+
+        //We'd be in a physical object - don't want to move here
+        if (Physics.CheckBox(newPos, playerSize * 0.5f, player.rotation, ~LayerMask.GetMask("Player"), QueryTriggerInteraction.Ignore))
         {
+            posMono.m_velocity = Vector3.zero;
             return;
         }
 
+        posMono.m_velocity = velocity;
         player.position = newPos;
     }
-    
+
+    private static float GetEnvironmentSpeedModifiers(Transform player, Vector3 playerSize)
+    {
+        Collider[] colliders = Physics.OverlapBox(player.position, playerSize, player.rotation, int.MaxValue, QueryTriggerInteraction.Collide);
+        foreach(Collider col in colliders)
+        {
+            Trap trap = col.GetComponent<Trap>();
+            switch(trap)
+            {
+                case SlowTrap slowtrap when trap is SlowTrap:
+                    return slowtrap.m_speedPercentageInTrap;
+            }
+        }
+
+        return 1.0f;
+    }
+
+    public static Vector3 GetCurrentHeight(MovementState movementType, PlayerData playerData)
+    {
+        switch (movementType)
+        {
+            case MovementState.CROUCHING:
+                return playerData.m_crouchSize;
+
+            case MovementState.RUNNING:
+            case MovementState.WALKING:
+                return playerData.m_standingSize;
+
+            default:
+                Debug.LogError("Movement state not valid");
+                return Vector3.one;
+        }
+    }
+
     private static (float movementSpeed, Vector3 playerSize) GetCurrentPlayerSpeedAndSize(MovementState movementType, PlayerData playerData)
     {
         switch (movementType)
