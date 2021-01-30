@@ -7,8 +7,6 @@ using UnityEngine.UI;
 
 public class ConnectingState : FlowStateBase
 {
-    private GameObject m_player;
-    private Camera m_playerCamera;
     private Image m_curtain;
     private float m_remainingTime;
     private float m_maxFadeTime = 1;
@@ -28,7 +26,7 @@ public class ConnectingState : FlowStateBase
         m_curtain.color = new Color(0, 0, 0, m_remainingTime / m_maxFadeTime);
         if (m_remainingTime < 0)
         {
-            ControllingStateStack.PushState(new BaseGameState(m_player,m_playerCamera));
+            EndDismissingState();
         }
     }
 
@@ -65,16 +63,20 @@ public class ConnectingState : FlowStateBase
     {
         Debug.Log($"Joined room {PhotonNetwork.CurrentRoom.Name}");
         
-        m_player = PhotonNetwork.Instantiate("Player",Vector3.zero,Quaternion.identity);
-        m_player.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
-        ControllingStateStack.PopState(this);
+        GameObject player = PhotonNetwork.Instantiate("Player",Vector3.zero,Quaternion.identity);
+        player.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
+        
         m_remainingTime = m_maxFadeTime;
-        var attachPoint = m_player.FindChildByName("Camera_Attach").transform;
-        m_playerCamera = Camera.main;
-        var transform = m_playerCamera.transform;
+        
+        Camera playerCamera = Camera.main;
+        var transform = playerCamera.transform;
+        
+        var attachPoint = player.FindChildByName("Camera_Attach").transform;
         transform.SetParent(attachPoint);
         transform.localPosition = Vector3.zero;
         transform.localRotation = Quaternion.identity;
+        
+        ControllingStateStack.ChangeState(new BaseGameState(player,playerCamera));
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
