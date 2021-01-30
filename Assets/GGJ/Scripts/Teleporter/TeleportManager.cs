@@ -35,6 +35,11 @@ public class TeleportManager
             {
                 List<TeleporterMono> cp = new List<TeleporterMono>(channel);
                 cp.Remove(teleporter);
+                for (int i = cp.Count - 1; i >= 0; --i) // Remove all telelporters that aren't exits
+                {
+                    if(cp[i].m_type == TeleportType.ENTRY)
+                        cp.RemoveAt(i);
+                }
                 int index = Random.Range(0, cp.Count);
                 mono.transform.position = cp[index].transform.position;
             }
