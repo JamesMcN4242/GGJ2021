@@ -12,7 +12,8 @@ public class PositionMono : MonoBehaviour, IPunObservable
 
     public void LateUpdate()
     {
-        transform.position = Vector3.Lerp(m_start, m_end, m_currentTime / m_lag);
+        if(Mathf.Abs(m_lag) > 0)
+            transform.position = Vector3.Lerp(m_start, m_end, m_currentTime / m_lag);
         m_currentTime += Time.deltaTime;
     }
 
@@ -25,12 +26,12 @@ public class PositionMono : MonoBehaviour, IPunObservable
         }
         else
         {
-            transform.position = (Vector3)stream.ReceiveNext();
+            Vector3 position = (Vector3)stream.ReceiveNext();
             m_velocity = (Vector3) stream.ReceiveNext();
 
             m_start = m_end;
             m_lag = Mathf.Abs((float) (PhotonNetwork.Time - info.SentServerTime));
-            m_end += m_velocity * m_lag;
+            m_end = position + m_velocity * m_lag;
             m_currentTime = 0;
         }
     }
