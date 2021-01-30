@@ -34,7 +34,7 @@ public static class PlayerMovement
         return input;
     }
 
-    public static void MovePlayer(Transform player, Transform facingDirection, Vector2 input, PlayerData playerData, MovementState movementType, PositionMono posMono, float deltaTime)
+    public static void MovePlayer(Transform player, Transform facingDirection, Vector2 input, PlayerData playerData, MovementState movementType, PositionMono posMono, float powerupModifier, float deltaTime)
     {
         Vector3 newPos = player.position;
 
@@ -47,7 +47,7 @@ public static class PlayerMovement
         Vector3 right = facingDirection.right * input.x;
         right.y = 0.0f;
 
-        Vector3 velocity = (forward + right).normalized * movementSpeed * movementModifier;
+        Vector3 velocity = (forward + right).normalized * movementSpeed * movementModifier * powerupModifier;
 
         newPos += velocity * deltaTime;
 

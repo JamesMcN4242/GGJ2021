@@ -23,7 +23,6 @@ public class BaseGameState : FlowStateBase
         m_inputKeys = InputKeyManagement.GetSavedOrDefaultKeyCodes();
 
         m_positionMono = player.GetComponent<PositionMono>();
-
         m_cameraRotation = m_playerCamera.eulerAngles;
 
         //TODO: Decide if seeker or hider
@@ -42,8 +41,13 @@ public class BaseGameState : FlowStateBase
         Vector2 input = PlayerMovement.GetPlayerMovement(m_inputKeys);
         m_playerMovementState = PlayerMovement.GetMovementState(m_playerMovementState, m_inputKeys);
 
-        PlayerMovement.MovePlayer(m_player, m_playerCamera, input, m_localPlayerData, m_playerMovementState, m_positionMono, Time.deltaTime);
+        float deltaTime = Time.deltaTime;
+        float speedModifier = m_powerUpData.m_type == PowerUpTypes.SPEED_BOOST ? m_powerUpData.m_affectingValue : 1.0f;
+        PlayerMovement.MovePlayer(m_player, m_playerCamera, input, m_localPlayerData, m_playerMovementState, m_positionMono, speedModifier, deltaTime);
         CameraSystem.UpdateCameraRotation(m_playerCamera, ref m_cameraRotation);
+
+        var powerUpsCollided = PowerUpSystem.GetIntersectingPowerUp(m_player, PlayerMovement.GetCurrentHeight(m_playerMovementState, m_localPlayerData));
+        m_powerUpData = powerUpsCollided.hitPowerUp ? powerUpsCollided.powerUpData : PowerUpSystem.UpdatePowerUpData(m_powerUpData, deltaTime);
     }
 
     #region Photon
