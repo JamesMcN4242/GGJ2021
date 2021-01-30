@@ -6,7 +6,8 @@ public class BaseGameState : FlowStateBase
 {
     private KeyCodeSet m_inputKeys;
     private Transform m_player;
-    private Transform m_playerCamera;
+    private Camera m_playerCamera;
+    private Transform m_playerCameraTrans;
     private PositionMono m_positionMono;
     private PlayerData m_localPlayerData;
     private PlayerMovement.MovementState m_playerMovementState;
@@ -19,11 +20,12 @@ public class BaseGameState : FlowStateBase
     public BaseGameState(GameObject player, Camera playerCamera)
     {
         m_player = player.transform;
-        m_playerCamera = playerCamera.transform;
+        m_playerCamera = playerCamera;
+        m_playerCameraTrans = playerCamera.transform;
         m_inputKeys = InputKeyManagement.GetSavedOrDefaultKeyCodes();
 
         m_positionMono = player.GetComponent<PositionMono>();
-        m_cameraRotation = m_playerCamera.eulerAngles;
+        m_cameraRotation = m_playerCameraTrans.eulerAngles;
 
         //TODO: Decide if seeker or hider
         m_localPlayerData = Resources.Load<PlayerData>("PlayerData/HiderData");
@@ -43,18 +45,30 @@ public class BaseGameState : FlowStateBase
 
         float deltaTime = Time.deltaTime;
         float speedModifier = m_powerUpData.m_type == PowerUpTypes.SPEED_BOOST ? m_powerUpData.m_affectingValue : 1.0f;
-        PlayerMovement.MovePlayer(m_player, m_playerCamera, input, m_localPlayerData, m_playerMovementState, m_positionMono, speedModifier, deltaTime);
-        CameraSystem.UpdateCameraRotation(m_playerCamera, ref m_cameraRotation);
+        PlayerMovement.MovePlayer(m_player, m_playerCameraTrans, input, m_localPlayerData, m_playerMovementState, m_positionMono, speedModifier, deltaTime);
+        CameraSystem.UpdateCameraRotation(m_playerCameraTrans, ref m_cameraRotation);
+        UpdatePowerUps(deltaTime);
+    }
 
+    private void UpdatePowerUps(float deltaTime)
+    {
         var powerUpsCollided = PowerUpSystem.GetIntersectingPowerUp(m_player, PlayerMovement.GetCurrentHeight(m_playerMovementState, m_localPlayerData));
-        m_powerUpData = powerUpsCollided.hitPowerUp ? powerUpsCollided.powerUpData : PowerUpSystem.UpdatePowerUpData(m_powerUpData, deltaTime);
+
+        if (powerUpsCollided.hitPowerUp)
+        {
+            PowerUpSystem.TransitionPowerUps(m_powerUpData, powerUpsCollided.powerUpData, m_player);
+            m_powerUpData = powerUpsCollided.powerUpData;
+            return;
+        }
+
+        m_powerUpData = PowerUpSystem.UpdatePowerUpData(m_powerUpData, m_player, deltaTime);
     }
 
     #region Photon
     public override void OnDisconnected(DisconnectCause cause)
     {
         Debug.LogWarning($"Disconnected From Server: {cause}");
-        m_playerCamera.SetParent(null);
+        m_playerCameraTrans.SetParent(null);
         ControllingStateStack.ChangeState(new ErrorState($"Disconnected from the server MSG: {cause}."));
     }
 
