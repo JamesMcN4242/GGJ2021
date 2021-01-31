@@ -28,6 +28,8 @@ public class BaseGameState : FlowStateBase
     private Vector3 m_playerRotation;
     private bool Connected => m_player != null;
 
+    private float m_separationTime = 0;
+
     private LoserCount m_loserCount;
 
     public BaseGameState()
@@ -136,8 +138,24 @@ public class BaseGameState : FlowStateBase
                 m_ball.transform.SetParent(null,true);
                 m_ballHeld = false;
                 m_catchBallTimer = 0.8f;
+                m_separationTime = 0;
             }
 
+            if (m_ballHeld == false)
+            {
+                m_separationTime += Time.deltaTime;
+                var diff = m_player.position - m_ball.position;
+                if (diff.magnitude < 5f)
+                {
+                    m_ball.AddForce(diff.normalized * 0.5f);
+                }
+
+                if (m_separationTime > 10f)
+                {
+                    m_ball.velocity -= m_ball.velocity * 0.9f * Time.deltaTime;
+                }    
+            }
+            
             if (m_catchBallTimer > 0)
             {
                 m_catchBallTimer -= Time.deltaTime;
