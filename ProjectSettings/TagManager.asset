@@ -15,8 +15,8 @@ TagManager:
   - Mask
   - SeeThrough
   - Ball
-  - 
-  - 
+  - BallCollider
+  - Seeker
   - 
   - 
   - 

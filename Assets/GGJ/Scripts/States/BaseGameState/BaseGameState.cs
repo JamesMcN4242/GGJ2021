@@ -108,6 +108,7 @@ public class BaseGameState : FlowStateBase
     {
         if ( m_isSeeker )
         {
+            m_player.gameObject.layer = LayerMask.NameToLayer("Seeker");
             var ball = GameObject.Find("Ball");
             m_ball = ball.GetComponent<Rigidbody>();
             ball.GetComponent<PhotonView>().RequestOwnership();
