@@ -7,14 +7,18 @@ public class PositionMono : MonoBehaviour, IPunObservable
     public bool IsSeeker = false;
     private Animator m_animator;
     [HideInInspector] public Vector3 m_velocity;
+
     private Vector3 m_start;
     private Vector3 m_end;
     private float m_currentTime = 0;
     private float m_lag;
 
+    private PlayerAudioMovement m_audioMovement;
+
     public void Awake()
     {
         m_animator = GetComponent<Animator>();
+        m_audioMovement = GetComponent<PlayerAudioMovement>();
     }
 
     public void LateUpdate()
@@ -24,6 +28,7 @@ public class PositionMono : MonoBehaviour, IPunObservable
         m_currentTime += Time.deltaTime;
 
         m_animator.SetFloat("MovementSpeed", m_velocity.magnitude);
+        m_audioMovement.m_walkingSpeed = m_velocity.magnitude;
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
