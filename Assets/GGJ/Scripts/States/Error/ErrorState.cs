@@ -24,6 +24,8 @@ public class ErrorState : FlowStateBase
     protected override void StartPresentingState()
     {
         m_uiError.SetMessage(m_message);
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.None;
     }
 
     protected override void HandleMessage(object message)

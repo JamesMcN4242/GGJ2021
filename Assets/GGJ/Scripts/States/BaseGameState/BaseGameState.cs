@@ -40,6 +40,12 @@ public class BaseGameState : FlowStateBase
         }
     }
 
+    protected override void StartPresentingState()
+    {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+    }
+
     protected override void UpdatePresentingState()
     {
         NetworkedPlayerInfo playerInfo = GameObject.FindObjectOfType<NetworkedPlayerInfo>();
@@ -90,9 +96,7 @@ public class BaseGameState : FlowStateBase
 
     protected override void StartActiveState()
     {
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
-        
+
         if ( m_isSeeker )
         {
             var ball = GameObject.Find("Ball");
