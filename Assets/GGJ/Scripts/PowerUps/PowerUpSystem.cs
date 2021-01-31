@@ -32,6 +32,7 @@ public static class PowerUpSystem
 
             if(powerUp != null)
             {
+                powerUp.SetClaimed();
                 return (true, powerUp.GetPowerUpData());
             }
         }
