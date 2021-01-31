@@ -260,6 +260,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_id: 9
   m_type: 0
+  m_acceptsSeeker: 0
 --- !u!135 &7475322463352952574
 SphereCollider:
   m_ObjectHideFlags: 0

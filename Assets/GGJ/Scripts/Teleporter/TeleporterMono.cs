@@ -12,7 +12,7 @@ public class TeleporterMono : MonoBehaviour
 {
     [Range(0,TeleportManager.k_channelCount-1)] public uint m_id;
     public TeleportType m_type = TeleportType.BOTH;
-    private bool m_acceptsSeeker = false;
+    public bool m_acceptsSeeker = true;
     private TeleportManager m_manager;
     
     public void RegisterManager(TeleportManager manager) { m_manager = manager; }
