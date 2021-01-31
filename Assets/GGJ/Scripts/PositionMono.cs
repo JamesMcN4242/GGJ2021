@@ -4,17 +4,25 @@ using UnityEngine;
 
 public class PositionMono : MonoBehaviour, IPunObservable
 {
+    private Animator m_animator;
     public Vector3 m_velocity;
     public Vector3 m_start;
     public Vector3 m_end;
     public float m_currentTime = 0;
     public float m_lag;
 
+    public void Awake()
+    {
+        m_animator = GetComponent<Animator>();
+    }
+
     public void LateUpdate()
     {
         if(Mathf.Abs(m_lag) > 0)
             transform.position = Vector3.Lerp(m_start, m_end, m_currentTime / m_lag);
         m_currentTime += Time.deltaTime;
+
+        m_animator.SetFloat("MovementSpeed", m_velocity.magnitude);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)

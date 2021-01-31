@@ -46,7 +46,9 @@ public class BaseGameState : FlowStateBase
 
             Vector3 startPos = GameObject.Find(playerInformation.m_spawnPos).transform.position;
             GameObject player = PhotonNetwork.Instantiate("Player", startPos, Quaternion.identity);
-            player.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
+
+            //Do we still want to be doing this??
+            player.FindChildByName("Box004").GetComponent<SkinnedMeshRenderer>().material.color = Random.ColorHSV();
 
 
             Camera playerCamera = Camera.main;
