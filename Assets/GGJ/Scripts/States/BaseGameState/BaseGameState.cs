@@ -9,6 +9,7 @@ public class BaseGameState : FlowStateBase
 {
     private KeyCodeSet m_inputKeys;
     private Transform m_player;
+    private CharacterController m_characterController;
     private Camera m_playerCamera;
     private Transform m_playerCameraTrans;
     private PositionMono m_positionMono;
@@ -50,8 +51,8 @@ public class BaseGameState : FlowStateBase
 
             Vector3 startPos = GameObject.Find(playerInformation.m_spawnPos).transform.position;
             GameObject player = PhotonNetwork.Instantiate("Player", startPos, Quaternion.identity);
-            player.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
-            
+            m_characterController = player.GetComponent<CharacterController>();
+
             Camera playerCamera = Camera.main;
             var transform = playerCamera.transform;
 
@@ -109,8 +110,9 @@ public class BaseGameState : FlowStateBase
 
         float deltaTime = Time.deltaTime;
         float speedModifier = m_powerUpData.m_type == PowerUpTypes.SPEED_BOOST ? m_powerUpData.m_affectingValue : 1.0f;
-        PlayerMovement.MovePlayer(m_player, m_playerCameraTrans, input, m_localPlayerData, m_playerMovementState, m_positionMono, speedModifier, deltaTime);
+        PlayerMovement.MovePlayer(m_characterController, m_player, m_playerCameraTrans, input, m_localPlayerData, m_playerMovementState, m_positionMono, speedModifier, deltaTime);
         CameraSystem.UpdateCameraRotation(m_player,ref m_playerRotation,m_playerCameraTrans, ref m_cameraRotation);
+        LeverSystem.UpdateLeverInteractions(m_player, PlayerMovement.GetCurrentHeight(m_playerMovementState, m_localPlayerData), m_inputKeys);
         UpdatePowerUps(deltaTime);
 
         if (m_isSeeker)
