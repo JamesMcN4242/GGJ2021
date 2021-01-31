@@ -62,7 +62,7 @@ public static class PowerUpSystem
                 if (pos.transform == localPlayerTrans) continue;
 
                 GameObject obj = GameObject.Instantiate(xrayPrefab);
-                obj.GetComponent<XrayMaskMono>().SetTargets(pos.transform, cameraTrans);
+                obj.GetComponent<XrayMaskMono>().SetTargets(pos.transform, cameraTrans, Vector3.zero.CopyWithY(1.0f));
             }
         }
     }

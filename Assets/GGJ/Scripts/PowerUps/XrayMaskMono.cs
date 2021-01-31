@@ -17,6 +17,7 @@ public class XrayMaskMono : MonoBehaviour
 
     private Transform m_trackingPlayerTransform;
     private Transform m_cameraTransform;
+    private Vector3 m_positionOffset;
 
     private void OnDrawGizmos()
     {
@@ -26,7 +27,12 @@ public class XrayMaskMono : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Vector3 direction = (m_trackingPlayerTransform.position - m_cameraTransform.position).normalized;
+        if(m_trackingPlayerTransform == null || m_cameraTransform == null)
+        {
+            DestroyImmediate(gameObject);
+        }
+
+        Vector3 direction = (m_trackingPlayerTransform.position + m_positionOffset - m_cameraTransform.position).normalized;
         transform.position = m_cameraTransform.position + direction * k_cameraOffset;
 
         switch(m_currentState)
@@ -65,10 +71,11 @@ public class XrayMaskMono : MonoBehaviour
         }
     }
 
-    public void SetTargets(Transform playerTransform, Transform cameraTransform)
+    public void SetTargets(Transform playerTransform, Transform cameraTransform, Vector3 targetOffset)
     {
         m_cameraTransform = cameraTransform;
         m_trackingPlayerTransform = playerTransform;
+        m_positionOffset = targetOffset;
     }
 
     public void SetToDestroy()
