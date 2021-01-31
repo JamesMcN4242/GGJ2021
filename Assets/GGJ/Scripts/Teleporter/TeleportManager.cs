@@ -3,6 +3,8 @@ using UnityEngine;
 
 public class TeleportManager
 {
+    public bool m_initialised = false;
+    
     public const uint k_channelCount = 10;
     public List<TeleporterMono>[] m_buckets = new List<TeleporterMono>[k_channelCount];
     public PositionMono m_player;
@@ -13,6 +15,7 @@ public class TeleportManager
 
     public void Initialise(PositionMono player)
     {
+        m_initialised = true;
         m_player = player;
         m_characterController = m_player.GetComponent<CharacterController>();
         for (var i = 0; i < m_buckets.Length; i++)
@@ -30,7 +33,7 @@ public class TeleportManager
     
     public void TeleportPositionMono(TeleporterMono teleporter, PositionMono mono)
     {
-        if (mono == m_player && m_active)
+        if (m_initialised && mono == m_player && m_active)
         {
             m_active = false;
             var channel = m_buckets[teleporter.m_id];
@@ -54,7 +57,7 @@ public class TeleportManager
 
     public void ExitTeleporter(PositionMono mono)
     {
-        if (mono == m_player && !m_active)
+        if (m_initialised && mono == m_player && !m_active)
         {
             if (++exitCount == 2)
             {
