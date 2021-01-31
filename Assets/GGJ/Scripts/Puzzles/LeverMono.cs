@@ -15,7 +15,6 @@ public class LeverMono : MonoBehaviour
 
     public void RPCCallingToggle()
     {
-        Toggle();
         PhotonView view = PhotonView.Get(this);
         view.RPC("Toggle", RpcTarget.All);
     }
