@@ -76,7 +76,7 @@ public class BaseGameState : FlowStateBase
             m_ball.AddForce(m_playerCamera.transform.forward * 130);
             m_ball.transform.SetParent(null,true);
             m_ballHeld = false;
-            m_catchBallTimer = 2f;
+            m_catchBallTimer = 0.8f;
         }
 
         if (m_catchBallTimer > 0)
@@ -84,7 +84,7 @@ public class BaseGameState : FlowStateBase
             m_catchBallTimer -= Time.deltaTime;
         }
 
-        if (m_ballHeld == false && m_catchBallTimer < 0 && m_ball != null && Vector3.Distance(m_ball.transform.position,m_player.position) < 1.5f)
+        if (m_ballHeld == false && m_catchBallTimer < 0 && m_ball != null && Vector3.Distance(m_ball.transform.position.CopyWithY(0),m_player.position.CopyWithY(0)) < 1.5f && Mathf.Abs(m_ball.transform.position.y-m_player.transform.position.y) < 1f)
         {
             m_ball.transform.SetParent(m_ballAttachTransform,true);
             m_ball.transform.localPosition = Vector3.zero;
