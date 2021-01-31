@@ -22,7 +22,7 @@ public class TeleporterMono : MonoBehaviour
         var mono = other.GetComponent<PositionMono>();
         if (mono != null && m_type != TeleportType.EXIT && (m_acceptsSeeker || !mono.IsSeeker))
         {
-            m_manager.TeleportPositionMono(this,mono);
+            m_manager?.TeleportPositionMono(this,mono);
         }
     }
 
@@ -31,7 +31,7 @@ public class TeleporterMono : MonoBehaviour
         var mono = other.collider.GetComponent<PositionMono>();
         if (mono != null)
         {
-            m_manager.ExitTeleporter(mono);
+            m_manager?.ExitTeleporter(mono);
         }
     }
 }

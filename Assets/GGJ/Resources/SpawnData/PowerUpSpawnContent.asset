@@ -15,7 +15,7 @@ MonoBehaviour:
   m_powerUpsToSpawn:
   - m_powerUpType: 2
     m_powerUpPrefabPath: PowerUpPrefabs/SpeedBoostPowerUp
-    m_numberToSpawn: 1
+    m_numberToSpawn: 2
   - m_powerUpType: 1
     m_powerUpPrefabPath: PowerUpPrefabs/XRayPowerUp
     m_numberToSpawn: 2
