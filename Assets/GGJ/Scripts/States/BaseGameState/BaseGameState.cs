@@ -31,8 +31,6 @@ public class BaseGameState : FlowStateBase
 
     private float m_separationTime = 0;
 
-    private LoserCount m_loserCount;
-
     public BaseGameState()
     {
         m_inputKeys = InputKeyManagement.GetSavedOrDefaultKeyCodes();
@@ -119,8 +117,6 @@ public class BaseGameState : FlowStateBase
         }
         
         m_teleportManager.Initialise(m_positionMono);
-
-        m_loserCount = GameObject.Find("LosersBox").GetComponent<LoserCount>();
     }
 
     protected override void UpdateActiveState()
@@ -179,10 +175,37 @@ public class BaseGameState : FlowStateBase
             }
         }
 
-        if (PhotonNetwork.CurrentRoom.PlayerCount != 1 && m_loserCount.m_loserCount == PhotonNetwork.CurrentRoom.PlayerCount - 1)
+        if (PhotonNetwork.CurrentRoom.PlayerCount != 1 && (LoserCount.s_loserCount + WinnerCount.s_winnerCount) == PhotonNetwork.CurrentRoom.PlayerCount - 1)
         {
             Debug.Log("Seeker Wins");
-            ControllingStateStack.ChangeState(new ErrorState(m_isSeeker ? "Congrats you Win!" : "LOSER!"));
+            if (m_isSeeker)
+            {
+                if (LoserCount.s_loserCount == 0)
+                {
+                    ControllingStateStack.ChangeState(new ErrorState("You failed to catch any of the hiders!"));    
+                }
+                else if (WinnerCount.s_winnerCount == 0)
+                {
+                    ControllingStateStack.ChangeState(new ErrorState("Congrats you caught all the hiders!"));
+                }
+                else
+                {
+                    ControllingStateStack.ChangeState(new ErrorState($"Catching {LoserCount.s_loserCount} hiders is good, all {LoserCount.s_loserCount+WinnerCount.s_winnerCount} is better."));
+                }
+            }
+            else
+            {
+                if (m_positionMono.m_escaped)
+                {
+                    ControllingStateStack.ChangeState(new ErrorState("Congrats you survived!"));
+                }
+                else
+                {
+                    ControllingStateStack.ChangeState(new ErrorState("You failed to escape, you're doomed for eternity."));
+                }
+            }
+            
+            
         }
     }
 
