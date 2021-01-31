@@ -7195,7 +7195,7 @@ MonoBehaviour:
     - Translation: {x: 0, y: 0}
       Scale: {x: 1, y: 1}
       RotationAngle: 0
-      RenderMaterial: {fileID: 2100000, guid: ca37785d773692b47bd7339c9dd802ce, type: 2}
+      RenderMaterial: {fileID: 2100000, guid: 91bc3719ce9086943b4130a2e6f18f00, type: 2}
       PhysicsMaterial: {fileID: 0}
       SmoothingGroup: 0
     - Translation: {x: 0, y: 0}
@@ -8926,10 +8926,10 @@ MonoBehaviour:
     surfaceParameter: 21354
     meshQueryIndex: 0
     subMeshQueryIndex: 0
-    geometryHashValue: -4661223407809365157
-    surfaceHashValue: -4957985314551216104
-    vertexCount: 1104
-    indexCount: 2052
+    geometryHashValue: -1882844568142646971
+    surfaceHashValue: -7543691875358687651
+    vertexCount: 1100
+    indexCount: 2046
   HasGeneratedNormals: 0
   HasUV2: 0
   LightingHashValue: 0
@@ -47959,10 +47959,10 @@ MonoBehaviour:
     surfaceParameter: 21042
     meshQueryIndex: 7
     subMeshQueryIndex: 0
-    geometryHashValue: 5412404081122454674
-    surfaceHashValue: 1032133187220804943
-    vertexCount: 2257
-    indexCount: 3405
+    geometryHashValue: -6950824407727148468
+    surfaceHashValue: -5434558440054039926
+    vertexCount: 2261
+    indexCount: 3411
   HasGeneratedNormals: 0
   HasUV2: 0
   LightingHashValue: 0
