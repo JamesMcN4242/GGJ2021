@@ -31,11 +31,13 @@ public class PositionMono : MonoBehaviour, IPunObservable
         {
             stream.SendNext(transform.position);
             stream.SendNext(m_velocity);
+            stream.SendNext(transform.rotation);
         }
         else
         {
             Vector3 position = (Vector3)stream.ReceiveNext();
             m_velocity = (Vector3) stream.ReceiveNext();
+            transform.rotation = (Quaternion)stream.ReceiveNext();
 
             m_start = transform.position;
             m_lag = Mathf.Abs((float) (PhotonNetwork.Time - info.SentServerTime)) * 2f;
