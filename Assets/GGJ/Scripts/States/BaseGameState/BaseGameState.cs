@@ -45,6 +45,13 @@ public class BaseGameState : FlowStateBase
             int playerId = PhotonNetwork.LocalPlayer.ActorNumber;
             var playerInformation = System.Array.Find(playerInfo.m_playerInformations.m_playerInformation, entry => entry.m_playerId == playerId);
 
+            if(playerInformation.m_playerId != playerId)
+            {
+                //Default values to set
+                int randomSpawnNum = Random.Range(0, 4);
+                playerInformation = new NetworkedPlayerInfo.PlayerInformation() { m_playerId = playerId, m_isSeeker = false, m_spawnPos = $"Hider ({randomSpawnNum})" };
+            }
+
             Vector3 startPos = GameObject.Find(playerInformation.m_spawnPos).transform.position;
             GameObject player = PhotonNetwork.Instantiate("Player", startPos, Quaternion.identity);
             m_characterController = player.GetComponent<CharacterController>();

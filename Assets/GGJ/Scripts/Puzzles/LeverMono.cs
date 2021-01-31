@@ -1,7 +1,9 @@
+using Photon.Pun;
 using UnityEngine;
 using UnityEngine.Events;
 
 [RequireComponent(typeof(BoxCollider))]
+[RequireComponent(typeof(PhotonView))]
 public class LeverMono : MonoBehaviour
 {
     [Tooltip("Time for the lever to resest. < 0 if this never happens")] [SerializeField] private float m_resetTimer = -1.0f;
@@ -11,7 +13,15 @@ public class LeverMono : MonoBehaviour
     private bool m_leverOn = false;
     private float m_timeReseting = 0.0f;
 
-    public void Toggle()
+    public void RPCCallingToggle()
+    {
+        Toggle();
+        PhotonView view = PhotonView.Get(this);
+        view.RPC("Toggle", RpcTarget.All);
+    }
+
+    [PunRPC]
+    private void Toggle()
     {
         if (m_leverOn && !m_canBeTurnedOff) return;
         ToggleInternal();

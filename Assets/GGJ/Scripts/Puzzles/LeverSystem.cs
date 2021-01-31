@@ -12,7 +12,7 @@ public static class LeverSystem
                 LeverMono lever = col.GetComponent<LeverMono>();
                 if(lever != null)
                 {
-                    lever.Toggle();
+                    lever.RPCCallingToggle();
                 }
             }
         }
