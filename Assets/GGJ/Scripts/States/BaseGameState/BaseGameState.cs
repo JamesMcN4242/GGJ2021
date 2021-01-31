@@ -27,6 +27,9 @@ public class BaseGameState : FlowStateBase
 
     private Vector3 m_cameraRotation;
     private Vector3 m_playerRotation;
+
+    private DoorMono m_doorMono = null;
+
     private bool Connected => m_player != null;
 
     private float m_separationTime = 0;
@@ -117,6 +120,7 @@ public class BaseGameState : FlowStateBase
         }
         
         m_teleportManager.Initialise(m_positionMono);
+        m_doorMono = GameObject.FindObjectOfType<DoorMono>();
     }
 
     protected override void UpdateActiveState()
@@ -207,6 +211,8 @@ public class BaseGameState : FlowStateBase
             
             
         }
+
+        m_baseGameUI.UpdateDoorButtonText(m_doorMono.m_leversInUse);
     }
 
     private void UpdatePowerUps(float deltaTime)
