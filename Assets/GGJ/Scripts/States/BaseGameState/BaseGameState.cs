@@ -1,5 +1,6 @@
 using PersonalFramework;
 using UnityEngine;
+using Photon.Pun;
 using Photon.Realtime;
 
 public class BaseGameState : FlowStateBase
@@ -13,22 +14,54 @@ public class BaseGameState : FlowStateBase
     private PlayerMovement.MovementState m_playerMovementState;
     private TeleportManager m_teleportManager = new TeleportManager();
     private PowerUpData m_powerUpData;
+    private bool m_isSeeker;
 
     private Vector3 m_cameraRotation;
     private bool Connected => m_player != null;
 
-    public BaseGameState(GameObject player, Camera playerCamera)
+    public BaseGameState()
     {
-        m_player = player.transform;
-        m_playerCamera = playerCamera;
-        m_playerCameraTrans = playerCamera.transform;
         m_inputKeys = InputKeyManagement.GetSavedOrDefaultKeyCodes();
+        if(NetworkPlayerStatus.s_isHost)
+        {
+            GameObject obj = PhotonNetwork.Instantiate("NetworkedPlayerInfo", Vector3.zero, Quaternion.identity);
+            obj.GetComponent<NetworkedPlayerInfo>().SetUpFromPlayers();
+        }
+    }
 
-        m_positionMono = player.GetComponent<PositionMono>();
-        m_cameraRotation = m_playerCameraTrans.eulerAngles;
+    protected override void UpdatePresentingState()
+    {
+        NetworkedPlayerInfo playerInfo = GameObject.FindObjectOfType<NetworkedPlayerInfo>();
+        if (playerInfo != null)
+        {
+            //TODO: Player model/colour differences depending on seeker or not
+            int playerId = PhotonNetwork.LocalPlayer.ActorNumber;
+            var playerInformation = System.Array.Find(playerInfo.m_playerInformations, entry => entry.m_playerId == playerId);
 
-        //TODO: Decide if seeker or hider
-        m_localPlayerData = Resources.Load<PlayerData>("PlayerData/HiderData");
+            Vector3 startPos = GameObject.Find(playerInformation.m_hiderSpawnPos).transform.position;
+            GameObject player = PhotonNetwork.Instantiate("Player", startPos, Quaternion.identity);
+            player.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
+
+            Camera playerCamera = Camera.main;
+            var transform = playerCamera.transform;
+
+            var attachPoint = player.FindChildByName("Camera_Attach").transform;
+            transform.SetParent(attachPoint);
+            transform.localPosition = Vector3.zero;
+            transform.localRotation = Quaternion.identity;
+
+            m_player = player.transform;
+            m_playerCamera = playerCamera;
+            m_playerCameraTrans = playerCamera.transform;
+            m_positionMono = player.GetComponent<PositionMono>();
+            m_cameraRotation = m_playerCameraTrans.eulerAngles;
+
+            m_isSeeker = playerInformation.m_isSeeker;
+            string dataName = playerInformation.m_isSeeker ? "Seeker" : "Hider";
+            m_localPlayerData = Resources.Load<PlayerData>($"PlayerData/{dataName}Data");
+
+            EndPresentingState();
+        }
     }
 
     protected override void StartActiveState()

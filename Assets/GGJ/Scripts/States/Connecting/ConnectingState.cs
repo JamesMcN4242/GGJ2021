@@ -66,26 +66,15 @@ public class ConnectingState : FlowStateBase
     {
         Debug.Log("Room Created.");
         SpawnSystem.SpawnPowerUps();
+        NetworkPlayerStatus.s_isHost = true;
     }
 
     public override void OnJoinedRoom()
     {
         Debug.Log($"Joined room {PhotonNetwork.CurrentRoom.Name}");
-        
-        GameObject player = PhotonNetwork.Instantiate("Player",Vector3.zero,Quaternion.identity);
-        player.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
-        
         m_remainingTime = m_maxFadeTime;
-        
-        Camera playerCamera = Camera.main;
-        var transform = playerCamera.transform;
-        
-        var attachPoint = player.FindChildByName("Camera_Attach").transform;
-        transform.SetParent(attachPoint);
-        transform.localPosition = Vector3.zero;
-        transform.localRotation = Quaternion.identity;
-        
-        ControllingStateStack.ChangeState(new BaseGameState(player,playerCamera));
+
+        ControllingStateStack.ChangeState(new WaitingOnPlayersState());
     }
 
     public override void OnJoinRoomFailed(short returnCode, string message)
