@@ -6,6 +6,6 @@ public class SpeedBoostPowerUpMono : PowerUpMono
 
     public override PowerUpData GetPowerUpData()
     {
-        return new PowerUpData() { m_type = PowerUpTypes.SPEED_BOOST, m_secondsRemaining = m_timeAffecting, m_affectingValue = m_speedMultiplier };
+        return new PowerUpData() { m_type = PowerUpTypes.SPEED_BOOST, m_secondsRemaining = m_timeAffecting, m_affectingValue = m_speedMultiplier, m_secondsTotal = m_timeAffecting };
     }
 }

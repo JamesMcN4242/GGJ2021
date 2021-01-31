@@ -10,5 +10,6 @@ public struct PowerUpData
 {
     public PowerUpTypes m_type;
     public float m_secondsRemaining;
+    public float m_secondsTotal;
     public float m_affectingValue;
 }

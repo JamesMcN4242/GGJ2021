@@ -7,6 +7,7 @@ using Random = UnityEngine.Random;
 
 public class BaseGameState : FlowStateBase
 {
+    private BaseGameUI m_baseGameUI;
     private KeyCodeSet m_inputKeys;
     private Transform m_player;
     private CharacterController m_characterController;
@@ -38,6 +39,13 @@ public class BaseGameState : FlowStateBase
             GameObject obj = PhotonNetwork.Instantiate("NetworkedPlayerInfo", Vector3.zero, Quaternion.identity);
             obj.GetComponent<NetworkedPlayerInfo>().SetUpFromPlayers();
         }
+    }
+
+    protected override bool AquireUIFromScene()
+    {
+        m_baseGameUI = GameObject.FindObjectOfType<BaseGameUI>();
+        m_ui = m_baseGameUI;
+        return m_ui != null;
     }
 
     protected override void StartPresentingState()
@@ -96,7 +104,6 @@ public class BaseGameState : FlowStateBase
 
     protected override void StartActiveState()
     {
-
         if ( m_isSeeker )
         {
             var ball = GameObject.Find("Ball");
@@ -168,10 +175,15 @@ public class BaseGameState : FlowStateBase
         {
             PowerUpSystem.TransitionPowerUps(m_powerUpData, powerUpsCollided.powerUpData, m_player);
             m_powerUpData = powerUpsCollided.powerUpData;
+            m_baseGameUI.UpdatePowerUpBacking(m_powerUpData.m_secondsRemaining, m_powerUpData.m_secondsTotal);
             return;
         }
 
-        m_powerUpData = PowerUpSystem.UpdatePowerUpData(m_powerUpData, m_player, deltaTime);
+        m_powerUpData = PowerUpSystem.UpdatePowerUpData(m_powerUpData, m_player,  deltaTime);
+        if(m_powerUpData.m_secondsTotal > 0.0f)
+        {
+            m_baseGameUI.UpdatePowerUpBacking(m_powerUpData.m_secondsRemaining, m_powerUpData.m_secondsTotal);
+        }
     }
 
     #region Photon
