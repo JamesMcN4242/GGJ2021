@@ -98,6 +98,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8946880346550518201}
   - component: {fileID: 4403884349931507426}
+  - component: {fileID: 2721383425722171417}
   m_Layer: 0
   m_Name: WinnersBox
   m_TagString: Untagged
@@ -135,6 +136,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 31.59, y: 36.84, z: 27.61}
   m_Center: {x: 2.5, y: 0, z: -14.9}
+--- !u!114 &2721383425722171417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7456391830694019116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5db41622cd204f42872a83c6ad167756, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8951397813837126249
 GameObject:
   m_ObjectHideFlags: 0

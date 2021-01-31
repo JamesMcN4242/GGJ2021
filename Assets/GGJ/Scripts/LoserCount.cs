@@ -10,8 +10,17 @@ public class LoserCount : MonoBehaviour
         if (player != null)
         {
             player.m_escaped = false;
-            ++s_loserCount; // this is terrible and if people manage to make it to the end of the area and back it will break it    
+            ++s_loserCount;     
         }
-        
+    }
+    
+    private void OnTriggerExit(Collider other)
+    {
+        var player = other.GetComponent<PositionMono>();
+        if (player != null)
+        {
+            player.m_escaped = false;
+            --s_loserCount;  
+        }
     }
 }

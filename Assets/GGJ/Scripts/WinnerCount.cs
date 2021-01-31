@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 public class WinnerCount : MonoBehaviour
 {
@@ -10,8 +11,17 @@ public class WinnerCount : MonoBehaviour
         if (player != null)
         {
             player.m_escaped = false;
-            ++s_winnerCount; // this is terrible and if people manage to make it to the end of the area and back it will break it    
+            ++s_winnerCount; 
         }
-        
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        var player = other.GetComponent<PositionMono>();
+        if (player != null)
+        {
+            player.m_escaped = false;
+            --s_winnerCount; 
+        }
     }
 }
