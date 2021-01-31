@@ -8,7 +8,7 @@ public class DoorMono : MonoBehaviour
     [SerializeField] private float m_timeToOpenOrClose = 1.0f;
 
     private Vector3 m_closedPosition;
-    private int m_leversInUse = 0;
+    [HideInInspector] public int m_leversInUse = 0;
     private float m_timeMoving = 0.0f;
 
     private void Awake()
