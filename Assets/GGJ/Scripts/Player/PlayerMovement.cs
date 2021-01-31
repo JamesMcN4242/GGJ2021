@@ -36,12 +36,10 @@ public static class PlayerMovement
         return input;
     }
 
-    public static void MovePlayer(Transform player, Transform facingDirection, Vector2 input, PlayerData playerData, MovementState movementType, PositionMono posMono, float powerupModifier, float deltaTime)
+    public static void MovePlayer(CharacterController player, Transform playerTrans, Transform facingDirection, Vector2 input, PlayerData playerData, MovementState movementType, PositionMono posMono, float powerupModifier, float deltaTime)
     {
-        Vector3 newPos = player.position;
-
         (float movementSpeed, Vector3 playerSize) = GetCurrentPlayerSpeedAndSize(movementType, playerData);
-        float movementModifier = GetEnvironmentSpeedModifiers(player, playerSize);
+        float movementModifier = GetEnvironmentSpeedModifiers(playerTrans, playerSize);
 
         Vector3 forward = facingDirection.forward * input.y;
         forward.y = 0.0f;
@@ -50,18 +48,8 @@ public static class PlayerMovement
         right.y = 0.0f;
 
         Vector3 velocity = (forward + right).normalized * movementSpeed * movementModifier * powerupModifier;
-
-        newPos += velocity * deltaTime;
-
-        //We'd be in a physical object - don't want to move here
-        if (Physics.CheckBox(newPos, playerSize * 0.5f, player.rotation, k_collisionLayer, QueryTriggerInteraction.Ignore))
-        {
-            posMono.m_velocity = Vector3.zero;
-            return;
-        }
-
+        player.Move(velocity * deltaTime);
         posMono.m_velocity = velocity;
-        player.position = newPos;
     }
 
     private static float GetEnvironmentSpeedModifiers(Transform player, Vector3 playerSize)
