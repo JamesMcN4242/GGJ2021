@@ -14,8 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_powerUpsToSpawn:
   - m_powerUpType: 2
-    m_powerUpPrefabPath: PowerUpPrefabs/SpeedBoostPowerUp
-    m_numberToSpawn: 1
+    m_powerUpPrefabPath: PowerUpPrefabs/Speedboost
+    m_numberToSpawn: 3
   - m_powerUpType: 1
-    m_powerUpPrefabPath: PowerUpPrefabs/XRayPowerUp
-    m_numberToSpawn: 2
+    m_powerUpPrefabPath: PowerUpPrefabs/XRay
+    m_numberToSpawn: 3
