@@ -14,7 +14,7 @@ public class WaitingOnPlayersState : FlowStateBase
     protected override void FixedUpdateActiveState()
     {
         int playerCount = PhotonNetwork.CurrentRoom.PlayerCount;
-        if (playerCount == 5)
+        if (playerCount == 5 || GameObject.FindObjectOfType<NetworkedPlayerInfo>() != null)
         {
             ControllingStateStack.ChangeState(new BaseGameState());
         }

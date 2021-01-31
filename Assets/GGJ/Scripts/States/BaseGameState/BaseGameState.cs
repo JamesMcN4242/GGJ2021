@@ -1,7 +1,6 @@
 using PersonalFramework;
 using Photon.Pun;
 using UnityEngine;
-using Photon.Pun;
 using Photon.Realtime;
 
 public class BaseGameState : FlowStateBase
@@ -43,7 +42,7 @@ public class BaseGameState : FlowStateBase
         {
             //TODO: Player model/colour differences depending on seeker or not
             int playerId = PhotonNetwork.LocalPlayer.ActorNumber;
-            var playerInformation = System.Array.Find(playerInfo.m_playerInformations, entry => entry.m_playerId == playerId);
+            var playerInformation = System.Array.Find(playerInfo.m_playerInformations.m_playerInformation, entry => entry.m_playerId == playerId);
 
             Vector3 startPos = GameObject.Find(playerInformation.m_spawnPos).transform.position;
             GameObject player = PhotonNetwork.Instantiate("Player", startPos, Quaternion.identity);
