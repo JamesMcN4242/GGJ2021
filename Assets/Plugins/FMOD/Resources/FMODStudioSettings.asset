@@ -416,8 +416,10 @@ MonoBehaviour:
   MasterBanks:
   - Master
   Banks:
+  - AMB
   - DX
   - FLY
+  - MX
   - SFX
   BanksToLoad: []
   LiveUpdatePort: 9264
