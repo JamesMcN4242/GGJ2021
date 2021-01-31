@@ -203,6 +203,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1404
+--- !u!114 &-5770357344067791987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/FLY/FootSteps (3D)
+  m_EditorClassIdentifier: 
+  Path: event:/FLY/FootSteps (3D)
+  guid: 88fd409104d35f42ac86bcdd959b12c7
+  Banks:
+  - {fileID: -4244808310594018176}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 350
 --- !u!114 &-5597896744824075509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -264,7 +287,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/FLY.bank
   Name: FLY
   StudioPath: bank:/FLY
-  lastModified: 637476514756539786
+  lastModified: 637477023872089447
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -306,7 +329,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/AMB.bank
   Name: AMB
   StudioPath: bank:/AMB
-  lastModified: 637476514756259872
+  lastModified: 637477023871609040
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -356,6 +379,28 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 2359
+--- !u!114 &-1326441294739442926
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/FLY/Footstep (run)
+  m_EditorClassIdentifier: 
+  Path: event:/FLY/Footstep (run)
+  guid: 300dccc3b5bc1b42957e7be9ea729694
+  Banks: []
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 350
 --- !u!114 &-241193735563349539
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -371,7 +416,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/MX.bank
   Name: MX
   StudioPath: bank:/MX
-  lastModified: 637476514757159512
+  lastModified: 637477023872509811
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -405,18 +450,19 @@ MonoBehaviour:
   - {fileID: -6539602732042058139}
   - {fileID: 1463022810661945069}
   - {fileID: 5210147265277829416}
-  - {fileID: 488136264187747855}
-  - {fileID: 7505763226708173599}
   - {fileID: -5597896744824075509}
   - {fileID: -4781153231031751614}
   - {fileID: -8767380629105420232}
   - {fileID: 1555077129941350727}
+  - {fileID: 6255011552719332331}
+  - {fileID: 2212601634384714253}
+  - {fileID: -5770357344067791987}
   EditorParameters: []
   MasterBanks:
   - {fileID: 5834665067868265062}
   StringsBanks:
   - {fileID: 7733917172719237594}
-  stringsBankWriteTime: 637476514757349061
+  stringsBankWriteTime: 637477023872169515
   cacheVersion: 6
 --- !u!114 &357077983792163556
 MonoBehaviour:
@@ -455,8 +501,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/AMB/Ambience
   guid: cfb89f01f713414d81b3da5c13cb4126
-  Banks:
-  - {fileID: -3408842391623189632}
+  Banks: []
   IsStream: 1
   Is3D: 0
   IsOneShot: 1
@@ -556,6 +601,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 2385
+--- !u!114 &2212601634384714253
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/FLY/FootSteps
+  m_EditorClassIdentifier: 
+  Path: event:/FLY/FootSteps
+  guid: e2756ef506207b4ab2572f36bbd04305
+  Banks:
+  - {fileID: -4244808310594018176}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 350
 --- !u!114 &2516357297574530052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -617,7 +685,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/DX.bank
   Name: DX
   StudioPath: bank:/DX
-  lastModified: 637476459800314729
+  lastModified: 637477023871879265
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -682,10 +750,33 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637476459800324733
+  lastModified: 637477023872149496
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &6255011552719332331
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/AMB/Night Ambience
+  m_EditorClassIdentifier: 
+  Path: event:/AMB/Night Ambience
+  guid: 2185f0c17b96b34192d3128199a20685
+  Banks:
+  - {fileID: -3408842391623189632}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 68824
 --- !u!114 &7154342922998757657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -720,7 +811,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637476514758943857
+  lastModified: 637477023873090310
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -738,8 +829,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/FLY/Footstep (run)
   guid: 300dccc3b5bc1b42957e7be9ea729694
-  Banks:
-  - {fileID: -4244808310594018176}
+  Banks: []
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -762,11 +852,11 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637476514757349061
+  lastModified: 637477023872169515
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1592
+    Value: 1640
   Exists: 1
 --- !u!114 &7763875090922332385
 MonoBehaviour:

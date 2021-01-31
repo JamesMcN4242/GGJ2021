@@ -71,6 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e05524af46c242c4a164e01eae525eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_escaped: 0
   IsSeeker: 0
   m_velocity: {x: 0, y: 0, z: 0}
 --- !u!114 &5699501327717348092
@@ -142,8 +143,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d965a2427ee1de459ca37a6c2370994, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_inputSound: 
-  m_playerIsMoving: 0
+  m_inputSound: event:/FLY/FootSteps
+  m_secondsBetweenSFX: 0.6
   m_walkingSpeed: 0
 --- !u!1 &252012208445718741
 GameObject:
