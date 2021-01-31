@@ -8,6 +8,8 @@ public static class PlayerMovement
         CROUCHING,
         RUNNING
     }
+    
+    private static readonly LayerMask k_collisionLayer = ~LayerMask.GetMask("Player", "Ball");
 
     public static MovementState GetMovementState(MovementState currentState, KeyCodeSet keyCodes)
     {
@@ -52,7 +54,7 @@ public static class PlayerMovement
         newPos += velocity * deltaTime;
 
         //We'd be in a physical object - don't want to move here
-        if (Physics.CheckBox(newPos, playerSize * 0.5f, player.rotation, ~LayerMask.GetMask("Player"), QueryTriggerInteraction.Ignore))
+        if (Physics.CheckBox(newPos, playerSize * 0.5f, player.rotation, k_collisionLayer, QueryTriggerInteraction.Ignore))
         {
             posMono.m_velocity = Vector3.zero;
             return;

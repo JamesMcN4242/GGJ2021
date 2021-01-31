@@ -1,4 +1,5 @@
 using PersonalFramework;
+using Photon.Pun;
 using UnityEngine;
 using Photon.Realtime;
 
@@ -13,8 +14,14 @@ public class BaseGameState : FlowStateBase
     private PlayerMovement.MovementState m_playerMovementState;
     private TeleportManager m_teleportManager = new TeleportManager();
     private PowerUpData m_powerUpData;
+    
+    private bool m_ballHeld;
+    private Rigidbody m_ball;
+    private float m_catchBallTimer = 0;
+    private Transform m_ballAttachTransform;
 
     private Vector3 m_cameraRotation;
+    private Vector3 m_playerRotation;
     private bool Connected => m_player != null;
 
     public BaseGameState(GameObject player, Camera playerCamera)
@@ -25,8 +32,11 @@ public class BaseGameState : FlowStateBase
         m_inputKeys = InputKeyManagement.GetSavedOrDefaultKeyCodes();
 
         m_positionMono = player.GetComponent<PositionMono>();
-        m_cameraRotation = m_playerCameraTrans.eulerAngles;
+        m_cameraRotation = m_playerCameraTrans.localEulerAngles;
+        m_playerRotation = m_player.eulerAngles;
 
+        m_ballAttachTransform = m_player.gameObject.FindChildByName("Ball_Attach").transform;
+        
         //TODO: Decide if seeker or hider
         m_localPlayerData = Resources.Load<PlayerData>("PlayerData/HiderData");
     }
@@ -36,6 +46,15 @@ public class BaseGameState : FlowStateBase
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         m_teleportManager.Initialise(m_positionMono);
+        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        {
+            var ball = PhotonNetwork.Instantiate("Ball",m_player.position + Vector3.up + m_playerCamera.transform.forward * 1.5f, Quaternion.identity);
+            m_ball = ball.GetComponent<Rigidbody>();
+            ball.transform.SetParent(m_ballAttachTransform,true);
+            ball.transform.localPosition = Vector3.zero;
+            m_ballHeld = true;
+            m_ball.isKinematic = true;
+        }
     }
 
     protected override void UpdateActiveState()
@@ -48,17 +67,31 @@ public class BaseGameState : FlowStateBase
         float deltaTime = Time.deltaTime;
         float speedModifier = m_powerUpData.m_type == PowerUpTypes.SPEED_BOOST ? m_powerUpData.m_affectingValue : 1.0f;
         PlayerMovement.MovePlayer(m_player, m_playerCameraTrans, input, m_localPlayerData, m_playerMovementState, m_positionMono, speedModifier, deltaTime);
-        CameraSystem.UpdateCameraRotation(m_playerCameraTrans, ref m_cameraRotation);
+        CameraSystem.UpdateCameraRotation(m_player,ref m_playerRotation,m_playerCameraTrans, ref m_cameraRotation);
         UpdatePowerUps(deltaTime);
 
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetMouseButton(0) && m_ballHeld)
         {
-            var prefab = Resources.Load<GameObject>("Ball");
-            var ball = GameObject.Instantiate(prefab);
-            ball.transform.position = m_player.position + Vector3.up + m_playerCamera.transform.forward * 1.5f;
-            ball.GetComponent<Rigidbody>().AddForce(m_playerCamera.transform.forward * 150);
+            m_ball.isKinematic = false;
+            m_ball.AddForce(m_playerCamera.transform.forward * 130);
+            m_ball.transform.SetParent(null,true);
+            m_ballHeld = false;
+            m_catchBallTimer = 2f;
         }
-        
+
+        if (m_catchBallTimer > 0)
+        {
+            m_catchBallTimer -= Time.deltaTime;
+        }
+
+        if (m_ballHeld == false && m_catchBallTimer < 0 && m_ball != null && Vector3.Distance(m_ball.transform.position,m_player.position) < 1.5f)
+        {
+            m_ball.transform.SetParent(m_ballAttachTransform,true);
+            m_ball.transform.localPosition = Vector3.zero;
+            m_ballHeld = true;
+            m_ball.velocity = Vector3.zero;
+            m_ball.isKinematic = true;
+        }
     }
 
     private void UpdatePowerUps(float deltaTime)
