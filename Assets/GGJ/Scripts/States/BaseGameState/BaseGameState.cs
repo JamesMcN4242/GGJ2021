@@ -32,7 +32,10 @@ public class BaseGameState : FlowStateBase
 
     private bool Connected => m_player != null;
 
+    private Transform m_globalBall;
+
     private float m_separationTime = 0;
+    private Material m_forcefield;
 
     public BaseGameState()
     {
@@ -55,6 +58,8 @@ public class BaseGameState : FlowStateBase
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+
+        m_forcefield = GameObject.Find("Ball Collider").GetComponent<MeshRenderer>().material;
     }
 
     protected override void UpdatePresentingState()
@@ -107,10 +112,11 @@ public class BaseGameState : FlowStateBase
 
     protected override void StartActiveState()
     {
+        var ball = GameObject.Find("Ball");
+        m_globalBall = ball.transform;
         if ( m_isSeeker )
         {
             m_player.gameObject.layer = LayerMask.NameToLayer("Seeker");
-            var ball = GameObject.Find("Ball");
             m_ball = ball.GetComponent<Rigidbody>();
             ball.GetComponent<PhotonView>().RequestOwnership();
             ball.transform.SetParent(m_ballAttachTransform,true);
@@ -208,9 +214,9 @@ public class BaseGameState : FlowStateBase
                     ControllingStateStack.ChangeState(new ErrorState("You failed to escape, you're doomed for eternity."));
                 }
             }
-            
-            
         }
+        
+        Shader.SetGlobalVector("Vector3_94154db5f30644be99f99d0fb94af7da",m_globalBall.position);
 
         m_baseGameUI.UpdateDoorButtonText(m_doorMono.m_leversInUse);
     }
