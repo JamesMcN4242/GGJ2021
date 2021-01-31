@@ -7,7 +7,7 @@ public class LoserCount : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         var player = other.GetComponent<PositionMono>();
-        if (player != null)
+        if (player != null && !player.IsSeeker)
         {
             player.m_escaped = false;
             ++s_loserCount;     
@@ -17,7 +17,7 @@ public class LoserCount : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         var player = other.GetComponent<PositionMono>();
-        if (player != null)
+        if (player != null && !player.IsSeeker)
         {
             player.m_escaped = false;
             --s_loserCount;  
