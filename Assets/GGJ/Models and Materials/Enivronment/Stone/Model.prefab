@@ -3750,7 +3750,7 @@ MonoBehaviour:
     - Translation: {x: 0, y: 0}
       Scale: {x: 1, y: 1}
       RotationAngle: 0
-      RenderMaterial: {fileID: 2100000, guid: 706fe88d3240a4d43bae445d5a89eb2e, type: 2}
+      RenderMaterial: {fileID: 2100000, guid: 91bc3719ce9086943b4130a2e6f18f00, type: 2}
       PhysicsMaterial: {fileID: 0}
       SmoothingGroup: 0
     - Translation: {x: 0, y: 0}
@@ -5777,10 +5777,10 @@ MonoBehaviour:
     surfaceParameter: 23718
     meshQueryIndex: 8
     subMeshQueryIndex: 0
-    geometryHashValue: 2508284471908876468
-    surfaceHashValue: 9172722187839690689
-    vertexCount: 32
-    indexCount: 48
+    geometryHashValue: -6296426167027119424
+    surfaceHashValue: -178152353120974925
+    vertexCount: 20
+    indexCount: 30
   HasGeneratedNormals: 0
   HasUV2: 0
   LightingHashValue: 0
@@ -10859,10 +10859,10 @@ MonoBehaviour:
     surfaceParameter: 21126
     meshQueryIndex: 6
     subMeshQueryIndex: 0
-    geometryHashValue: 8274331234169825500
-    surfaceHashValue: 8845747512404154448
-    vertexCount: 539
-    indexCount: 819
+    geometryHashValue: -4712840897416312420
+    surfaceHashValue: -7753946243253892061
+    vertexCount: 535
+    indexCount: 813
   HasGeneratedNormals: 0
   HasUV2: 0
   LightingHashValue: 0
@@ -31382,7 +31382,7 @@ MonoBehaviour:
     - Translation: {x: 0, y: 0}
       Scale: {x: 1, y: 1}
       RotationAngle: 0
-      RenderMaterial: {fileID: 2100000, guid: 706fe88d3240a4d43bae445d5a89eb2e, type: 2}
+      RenderMaterial: {fileID: 2100000, guid: 91bc3719ce9086943b4130a2e6f18f00, type: 2}
       PhysicsMaterial: {fileID: 0}
       SmoothingGroup: 0
     - Translation: {x: 0, y: 0}
@@ -34882,8 +34882,9 @@ GameObject:
   - component: {fileID: 1497569598}
   - component: {fileID: 1497569597}
   - component: {fileID: 7790513328161624419}
+  - component: {fileID: 5735479157993499858}
   - component: {fileID: 1497569594}
-  - component: {fileID: 8086032366388394262}
+  - component: {fileID: 7919181937620575361}
   m_Layer: 8
   m_Name: '[generated-collider-mesh]'
   m_TagString: Untagged
@@ -34964,6 +34965,20 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 14
   m_Mesh: {fileID: 0}
+--- !u!64 &5735479157993499858
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3120646369442482234}
+  m_Material: {fileID: 13400000, guid: 0c5fdfb44d6f19646a41a0720fbf751a, type: 2}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 4
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 0}
 --- !u!23 &1497569594
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -35005,7 +35020,7 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!33 &8086032366388394262
+--- !u!33 &7919181937620575361
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -39664,7 +39679,7 @@ MonoBehaviour:
     - Translation: {x: 0, y: 0}
       Scale: {x: 1, y: 1}
       RotationAngle: 0
-      RenderMaterial: {fileID: 2100000, guid: 706fe88d3240a4d43bae445d5a89eb2e, type: 2}
+      RenderMaterial: {fileID: 2100000, guid: 91bc3719ce9086943b4130a2e6f18f00, type: 2}
       PhysicsMaterial: {fileID: 0}
       SmoothingGroup: 0
     - Translation: {x: 0, y: 0}
@@ -40982,7 +40997,7 @@ MonoBehaviour:
     - Translation: {x: 0, y: 0}
       Scale: {x: 1, y: 1}
       RotationAngle: 0
-      RenderMaterial: {fileID: 2100000, guid: be7619d9f63ba2240baae7ce57e17a92, type: 2}
+      RenderMaterial: {fileID: 2100000, guid: 91bc3719ce9086943b4130a2e6f18f00, type: 2}
       PhysicsMaterial: {fileID: 0}
       SmoothingGroup: 0
     - Translation: {x: 0, y: 0}
@@ -42211,10 +42226,10 @@ MonoBehaviour:
     surfaceParameter: 19524
     meshQueryIndex: 1
     subMeshQueryIndex: 0
-    geometryHashValue: -4219214398795017164
-    surfaceHashValue: 1212706721563551778
-    vertexCount: 723
-    indexCount: 2691
+    geometryHashValue: 5162086158512798800
+    surfaceHashValue: 8173715792087576193
+    vertexCount: 719
+    indexCount: 2685
   HasGeneratedNormals: 0
   HasUV2: 0
   LightingHashValue: 0
@@ -44457,7 +44472,7 @@ MonoBehaviour:
     - Translation: {x: 0, y: 0}
       Scale: {x: 1, y: 1}
       RotationAngle: 0
-      RenderMaterial: {fileID: 2100000, guid: fc1f50122474fc948b2a1c7d894797bb, type: 2}
+      RenderMaterial: {fileID: 2100000, guid: 91bc3719ce9086943b4130a2e6f18f00, type: 2}
       PhysicsMaterial: {fileID: 0}
       SmoothingGroup: 0
     - Translation: {x: 0, y: 0}
@@ -48025,10 +48040,10 @@ MonoBehaviour:
     surfaceParameter: 21042
     meshQueryIndex: 7
     subMeshQueryIndex: 0
-    geometryHashValue: -4174635927060050938
-    surfaceHashValue: 2410911084063749697
-    vertexCount: 2261
-    indexCount: 3411
+    geometryHashValue: 814724973318065454
+    surfaceHashValue: 3725575378451017419
+    vertexCount: 2281
+    indexCount: 3441
   HasGeneratedNormals: 0
   HasUV2: 0
   LightingHashValue: 0
