@@ -59,6 +59,7 @@ public class BaseGameState : FlowStateBase
             Vector3 startPos = GameObject.Find(playerInformation.m_spawnPos).transform.position;
             GameObject player = PhotonNetwork.Instantiate("Player", startPos, Quaternion.identity);
             m_characterController = player.GetComponent<CharacterController>();
+            player.FindChildByName("Knight").SetActive(false);
 
             Camera playerCamera = Camera.main;
             var transform = playerCamera.transform;
