@@ -10,10 +10,10 @@ Material:
   m_Name: Portal
   m_Shader: {fileID: -6465566751694194690, guid: 8d9e2c814c4d0834ebb30874acf54afe, type: 3}
   m_ShaderKeywords: 
-  m_LightmapFlags: 4
+  m_LightmapFlags: 2
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
-  m_CustomRenderQueue: -1
+  m_CustomRenderQueue: 3000
   stringTagMap: {}
   disabledShaderPasses: []
   m_SavedProperties:
@@ -23,11 +23,23 @@ Material:
         m_Texture: {fileID: 10300, guid: 0000000000000000f000000000000000, type: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_3FC926F9: 6
     - Vector1_74749A43: 10
     - Vector1_A7133C80: 0.1
     - Vector1_E5CF5B35: 2
     m_Colors:
-    - Color_D2E524BA: {r: 0, g: 160.6275, b: 766.9961, a: 0}
+    - Color_D2E524BA: {r: 0, g: 22.057518, b: 102.75575, a: 0}
   m_BuildTextureStacks: []
