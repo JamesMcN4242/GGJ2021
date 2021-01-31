@@ -1,7 +1,9 @@
+using System;
 using PersonalFramework;
 using Photon.Pun;
 using UnityEngine;
 using Photon.Realtime;
+using Random = UnityEngine.Random;
 
 public class BaseGameState : FlowStateBase
 {
@@ -24,6 +26,8 @@ public class BaseGameState : FlowStateBase
     private Vector3 m_cameraRotation;
     private Vector3 m_playerRotation;
     private bool Connected => m_player != null;
+
+    private LoserCount m_loserCount;
 
     public BaseGameState()
     {
@@ -92,6 +96,8 @@ public class BaseGameState : FlowStateBase
         }
         
         m_teleportManager.Initialise(m_positionMono);
+
+        m_loserCount = GameObject.Find("LosersBox").GetComponent<LoserCount>();
     }
 
     protected override void UpdateActiveState()
@@ -131,6 +137,12 @@ public class BaseGameState : FlowStateBase
                 m_ball.velocity = Vector3.zero;
                 m_ball.isKinematic = true;
             }
+        }
+
+        if (PhotonNetwork.CurrentRoom.PlayerCount != 1 && m_loserCount.m_loserCount == PhotonNetwork.CurrentRoom.PlayerCount - 1)
+        {
+            Debug.Log("Seeker Wins");
+            ControllingStateStack.ChangeState(new ErrorState(m_isSeeker ? "Congrats you Win!" : "LOSER!"));
         }
     }
 
