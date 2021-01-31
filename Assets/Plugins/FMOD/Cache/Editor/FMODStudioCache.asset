@@ -1,5 +1,28 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-8767380629105420232
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/X-Ray Power Up
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/X-Ray Power Up
+  guid: 09faedac3b5679418c049e840376872e
+  Banks:
+  - {fileID: 7496420574565804509}
+  IsStream: 0
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 2000
 --- !u!114 &-8593917194340112045
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -180,6 +203,52 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1404
+--- !u!114 &-5597896744824075509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/MX/Menu_Music
+  m_EditorClassIdentifier: 
+  Path: event:/MX/Menu_Music
+  guid: bca1d16c53919f48bee6fe5f831d423f
+  Banks:
+  - {fileID: -241193735563349539}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 245995
+--- !u!114 &-4781153231031751614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/SFX/Fire Torch
+  m_EditorClassIdentifier: 
+  Path: event:/SFX/Fire Torch
+  guid: 067c0f38b383214993483b07b5aab106
+  Banks:
+  - {fileID: 7496420574565804509}
+  IsStream: 1
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 15787
 --- !u!114 &-4244808310594018176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -195,7 +264,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/FLY.bank
   Name: FLY
   StudioPath: bank:/FLY
-  lastModified: 637476459800314729
+  lastModified: 637476525324434121
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -222,6 +291,25 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 350
+--- !u!114 &-3408842391623189632
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/AMB.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD Session/Build/Desktop/AMB.bank
+  Name: AMB
+  StudioPath: bank:/AMB
+  lastModified: 637476525324424010
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &-2421409791036135502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -268,6 +356,25 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 2359
+--- !u!114 &-241193735563349539
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/MX.bank
+  m_EditorClassIdentifier: 
+  Path: FMOD Session/Build/Desktop/MX.bank
+  Name: MX
+  StudioPath: bank:/MX
+  lastModified: 637476525324743161
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &11400000
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -286,23 +393,30 @@ MonoBehaviour:
   - {fileID: -4244808310594018176}
   - {fileID: 5834665067868265062}
   - {fileID: 7496420574565804509}
+  - {fileID: -3408842391623189632}
+  - {fileID: -241193735563349539}
   EditorEvents:
   - {fileID: -5932196306568139418}
   - {fileID: -2421409791036135502}
   - {fileID: 357077983792163556}
   - {fileID: 969294326169799428}
   - {fileID: 8531720248210736121}
-  - {fileID: -3479087975325775146}
   - {fileID: 7962910889988169877}
   - {fileID: -6539602732042058139}
   - {fileID: 1463022810661945069}
   - {fileID: 5210147265277829416}
+  - {fileID: 488136264187747855}
+  - {fileID: 7505763226708173599}
+  - {fileID: -5597896744824075509}
+  - {fileID: -4781153231031751614}
+  - {fileID: -8767380629105420232}
+  - {fileID: 1555077129941350727}
   EditorParameters: []
   MasterBanks:
   - {fileID: 5834665067868265062}
   StringsBanks:
   - {fileID: 7733917172719237594}
-  stringsBankWriteTime: 637476459800324733
+  stringsBankWriteTime: 637476525324753135
   cacheVersion: 6
 --- !u!114 &357077983792163556
 MonoBehaviour:
@@ -327,6 +441,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 2359
+--- !u!114 &488136264187747855
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/AMB/Ambience
+  m_EditorClassIdentifier: 
+  Path: event:/AMB/Ambience
+  guid: cfb89f01f713414d81b3da5c13cb4126
+  Banks:
+  - {fileID: -3408842391623189632}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 1
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 68824
 --- !u!114 &969294326169799428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -373,6 +510,29 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 4531
+--- !u!114 &1555077129941350727
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/AMB/Wind
+  m_EditorClassIdentifier: 
+  Path: event:/AMB/Wind
+  guid: d1d58beb45a118438748585d41f01690
+  Banks:
+  - {fileID: 7496420574565804509}
+  IsStream: 1
+  Is3D: 0
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 0
+  MaxDistance: 0
+  Length: 20000
 --- !u!114 &1813702158423027912
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -457,7 +617,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/DX.bank
   Name: DX
   StudioPath: bank:/DX
-  lastModified: 637476459800314729
+  lastModified: 637476525225688861
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -522,7 +682,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637476459800324733
+  lastModified: 637476525225698722
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -560,10 +720,33 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637476459800344718
+  lastModified: 637476525325471210
   LoadResult: 0
   FileSizes: []
   Exists: 1
+--- !u!114 &7505763226708173599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
+  m_Name: event:/FLY/Footstep (run)
+  m_EditorClassIdentifier: 
+  Path: event:/FLY/Footstep (run)
+  guid: 300dccc3b5bc1b42957e7be9ea729694
+  Banks:
+  - {fileID: -4244808310594018176}
+  IsStream: 0
+  Is3D: 1
+  IsOneShot: 0
+  Parameters: []
+  MinDistance: 1
+  MaxDistance: 20
+  Length: 350
 --- !u!114 &7733917172719237594
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -579,11 +762,11 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637476459800324733
+  lastModified: 637476525324753135
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1300
+    Value: 1592
   Exists: 1
 --- !u!114 &7763875090922332385
 MonoBehaviour:
