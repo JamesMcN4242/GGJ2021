@@ -25,16 +25,16 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 579191344794014166}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.0029836, y: 0.004, z: 0.50724}
-  m_LocalScale: {x: 0.062582985, y: 0.0559953, z: 0.095416516}
+  m_LocalRotation: {x: 0.1400803, y: -0.024558693, z: 0.03174584, w: 0.98932636}
+  m_LocalPosition: {x: 0.012667656, y: -0.004698336, z: 0.5349272}
+  m_LocalScale: {x: 0.15662645, y: 0.14013945, z: 0.17109466}
   m_Children:
   - {fileID: 7067795926965140447}
   - {fileID: 1301970592147844124}
   - {fileID: 9109216658039221406}
   m_Father: {fileID: 6496063822112196594}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 16.184, y: -2.369, z: 3.339}
 --- !u!198 &5515020503707442594
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -4844,13 +4844,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4285340268693559507}
-  m_LocalRotation: {x: 0.6961376, y: -0, z: -0, w: 0.71790844}
-  m_LocalPosition: {x: 0.004347916, y: -0.06949396, z: 2.1635466}
+  m_LocalRotation: {x: 0.582601, y: -0.0046822503, z: -0.04179421, w: 0.8116696}
+  m_LocalPosition: {x: 0.004351622, y: 0.50001955, z: 2.1600578}
   m_LocalScale: {x: 0.0780525, y: 0.1522836, z: 0.12416557}
   m_Children: []
   m_Father: {fileID: 839044690504584281}
   m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: -1.764, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 70.973, y: -9.945, z: -12.994}
 --- !u!198 &153133615790734088
 ParticleSystem:
   m_ObjectHideFlags: 0
@@ -9785,7 +9785,7 @@ GameObject:
   - component: {fileID: 7789476718855861112}
   - component: {fileID: 1371993773967862716}
   m_Layer: 0
-  m_Name: Torch 1
+  m_Name: Torch
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
