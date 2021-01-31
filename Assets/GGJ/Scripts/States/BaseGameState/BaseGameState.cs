@@ -21,6 +21,7 @@ public class BaseGameState : FlowStateBase
     private Transform m_ballAttachTransform;
 
     private Vector3 m_cameraRotation;
+    private Vector3 m_playerRotation;
     private bool Connected => m_player != null;
 
     public BaseGameState(GameObject player, Camera playerCamera)
@@ -31,7 +32,8 @@ public class BaseGameState : FlowStateBase
         m_inputKeys = InputKeyManagement.GetSavedOrDefaultKeyCodes();
 
         m_positionMono = player.GetComponent<PositionMono>();
-        m_cameraRotation = m_playerCameraTrans.eulerAngles;
+        m_cameraRotation = m_playerCameraTrans.localEulerAngles;
+        m_playerRotation = m_player.eulerAngles;
 
         m_ballAttachTransform = m_player.gameObject.FindChildByName("Ball_Attach").transform;
         
@@ -65,13 +67,13 @@ public class BaseGameState : FlowStateBase
         float deltaTime = Time.deltaTime;
         float speedModifier = m_powerUpData.m_type == PowerUpTypes.SPEED_BOOST ? m_powerUpData.m_affectingValue : 1.0f;
         PlayerMovement.MovePlayer(m_player, m_playerCameraTrans, input, m_localPlayerData, m_playerMovementState, m_positionMono, speedModifier, deltaTime);
-        CameraSystem.UpdateCameraRotation(m_playerCameraTrans, ref m_cameraRotation);
+        CameraSystem.UpdateCameraRotation(m_player,ref m_playerRotation,m_playerCameraTrans, ref m_cameraRotation);
         UpdatePowerUps(deltaTime);
 
         if (Input.GetMouseButton(0) && m_ballHeld)
         {
             m_ball.isKinematic = false;
-            m_ball.AddForce(m_playerCamera.transform.forward * 125);
+            m_ball.AddForce(m_playerCamera.transform.forward * 130);
             m_ball.transform.SetParent(null,true);
             m_ballHeld = false;
             m_catchBallTimer = 2f;
