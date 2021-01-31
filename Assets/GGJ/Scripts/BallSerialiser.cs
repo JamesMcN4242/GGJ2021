@@ -27,12 +27,14 @@ public class BallSerialiser : MonoBehaviour, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(transform.position);
-            stream.SendNext(m_rigidbody);
+            stream.SendNext(m_rigidbody.velocity);
+            stream.SendNext(m_rigidbody.rotation);
         }
         else
         {
             Vector3 position = (Vector3)stream.ReceiveNext();
-            m_rigidbody = (Rigidbody) stream.ReceiveNext();
+            m_rigidbody.velocity = (Vector3) stream.ReceiveNext();
+            m_rigidbody.rotation = (Quaternion) stream.ReceiveNext();
 
             m_start = transform.position;
             m_lag = Mathf.Abs((float) (PhotonNetwork.Time - info.SentServerTime)) * 2f;
