@@ -5,12 +5,13 @@ public static class CameraSystem
     private const float k_verticalRotSpeed = 3.0f;
     private const float k_horizontalRotSpeed = 3.0f;
 
-    public static void UpdateCameraRotation(Transform camera, ref Vector3 eulerAngles)
+    public static void UpdateCameraRotation(Transform player, ref Vector3 playerEulerAngles, Transform camera, ref Vector3 cameraEulerAngles)
     {
-        eulerAngles.x -= Input.GetAxis("Mouse Y") * k_verticalRotSpeed;
-        eulerAngles.x = Mathf.Clamp(eulerAngles.x, -90, 90);
-        eulerAngles.y += Input.GetAxis("Mouse X") * k_horizontalRotSpeed;
+        cameraEulerAngles.x -= Input.GetAxis("Mouse Y") * k_verticalRotSpeed;
+        cameraEulerAngles.x = Mathf.Clamp(cameraEulerAngles.x, -90, 90);
+        playerEulerAngles.y += Input.GetAxis("Mouse X") * k_horizontalRotSpeed;
 
-        camera.eulerAngles = eulerAngles;
+        camera.localEulerAngles = cameraEulerAngles;
+        player.eulerAngles = playerEulerAngles;
     }
 }

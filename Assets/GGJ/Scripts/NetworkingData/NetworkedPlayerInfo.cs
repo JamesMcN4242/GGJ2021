@@ -11,7 +11,7 @@ public class NetworkedPlayerInfo : MonoBehaviour, IPunObservable
     {
         public int m_playerId;
         public bool m_isSeeker;
-        public string m_hiderSpawnPos;
+        public string m_spawnPos;
     }
 
     public PlayerInformation[] m_playerInformations;
@@ -45,7 +45,7 @@ public class NetworkedPlayerInfo : MonoBehaviour, IPunObservable
             {
                 m_isSeeker = isSeeker,
                 m_playerId = keyVal.Value.ActorNumber,
-                m_hiderSpawnPos = spawn.name
+                m_spawnPos = spawn.name
             };
         }
     }
