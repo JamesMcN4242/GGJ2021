@@ -2,15 +2,18 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class PositionMono : MonoBehaviour, IPunObservable
+public class BallSerialiser : MonoBehaviour, IPunObservable
 {
-    public bool IsSeeker;
-    
-    [HideInInspector] public Vector3 m_velocity;
+    private Rigidbody m_rigidbody;
     private Vector3 m_start;
     private Vector3 m_end;
     private float m_currentTime = 0;
     private float m_lag;
+    
+    private void Awake()
+    {
+        m_rigidbody = GetComponent<Rigidbody>();
+    }
 
     public void LateUpdate()
     {
@@ -24,16 +27,16 @@ public class PositionMono : MonoBehaviour, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(transform.position);
-            stream.SendNext(m_velocity);
+            stream.SendNext(m_rigidbody);
         }
         else
         {
             Vector3 position = (Vector3)stream.ReceiveNext();
-            m_velocity = (Vector3) stream.ReceiveNext();
+            m_rigidbody = (Rigidbody) stream.ReceiveNext();
 
             m_start = transform.position;
             m_lag = Mathf.Abs((float) (PhotonNetwork.Time - info.SentServerTime)) * 2f;
-            m_end = position + m_velocity * m_lag;
+            m_end = position + m_rigidbody.velocity * m_lag;
             m_currentTime = 0;
         }
     }
