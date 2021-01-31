@@ -287,7 +287,11 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/FLY.bank
   Name: FLY
   StudioPath: bank:/FLY
+<<<<<<< Updated upstream
   lastModified: 637477028018616912
+=======
+  lastModified: 637477036452072865
+>>>>>>> Stashed changes
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -329,7 +333,11 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/AMB.bank
   Name: AMB
   StudioPath: bank:/AMB
+<<<<<<< Updated upstream
   lastModified: 637477028018596937
+=======
+  lastModified: 637477036451652507
+>>>>>>> Stashed changes
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -416,7 +424,11 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/MX.bank
   Name: MX
   StudioPath: bank:/MX
+<<<<<<< Updated upstream
   lastModified: 637476514757159512
+=======
+  lastModified: 637477036452473188
+>>>>>>> Stashed changes
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -462,7 +474,11 @@ MonoBehaviour:
   - {fileID: 5834665067868265062}
   StringsBanks:
   - {fileID: 7733917172719237594}
+<<<<<<< Updated upstream
   stringsBankWriteTime: 637477028020356347
+=======
+  stringsBankWriteTime: 637477036452132919
+>>>>>>> Stashed changes
   cacheVersion: 6
 --- !u!114 &357077983792163556
 MonoBehaviour:
@@ -570,7 +586,7 @@ MonoBehaviour:
   Path: event:/AMB/Wind
   guid: d1d58beb45a118438748585d41f01690
   Banks:
-  - {fileID: 7496420574565804509}
+  - {fileID: -3408842391623189632}
   IsStream: 1
   Is3D: 0
   IsOneShot: 0
@@ -685,7 +701,11 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/DX.bank
   Name: DX
   StudioPath: bank:/DX
+<<<<<<< Updated upstream
   lastModified: 637476459800314729
+=======
+  lastModified: 637477036451862694
+>>>>>>> Stashed changes
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -750,7 +770,11 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
+<<<<<<< Updated upstream
   lastModified: 637476459800324733
+=======
+  lastModified: 637477036452122905
+>>>>>>> Stashed changes
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -811,7 +835,11 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
+<<<<<<< Updated upstream
   lastModified: 637477028021495996
+=======
+  lastModified: 637477036452742168
+>>>>>>> Stashed changes
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -852,7 +880,11 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
+<<<<<<< Updated upstream
   lastModified: 637477028020356347
+=======
+  lastModified: 637477036452132919
+>>>>>>> Stashed changes
   LoadResult: 0
   FileSizes:
   - Name: Desktop

@@ -26,7 +26,8 @@ public class PlayerAudioMovement : MonoBehaviour
         }
         else
         {
-            m_timePassed = 0.0f;
+            m_timePassed = m_secondsBetweenSFX; 
+
         }
     }
 }

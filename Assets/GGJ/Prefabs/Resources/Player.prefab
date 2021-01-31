@@ -144,8 +144,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_inputSound: event:/FLY/FootSteps
-  m_secondsBetweenSFX: 0.6
-  m_walkingSpeed: 0
+  m_secondsBetweenSFX: 0.4
+  m_walkingSpeed: 1
 --- !u!1 &252012208445718741
 GameObject:
   m_ObjectHideFlags: 0
