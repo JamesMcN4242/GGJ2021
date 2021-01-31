@@ -48,8 +48,11 @@ public static class PlayerMovement
         right.y = 0.0f;
 
         Vector3 velocity = (forward + right).normalized * movementSpeed * movementModifier * powerupModifier;
-        player.Move(velocity * deltaTime);
         posMono.m_velocity = velocity;
+
+        //Got to add gravity after or animator will always think we're running
+        velocity += Physics.gravity;
+        player.Move(velocity * deltaTime);
     }
 
     private static float GetEnvironmentSpeedModifiers(Transform player, Vector3 playerSize)
