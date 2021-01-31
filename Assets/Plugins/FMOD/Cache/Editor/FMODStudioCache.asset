@@ -287,7 +287,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/FLY.bank
   Name: FLY
   StudioPath: bank:/FLY
-  lastModified: 637477023872089447
+  lastModified: 637477028018616912
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -329,7 +329,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/AMB.bank
   Name: AMB
   StudioPath: bank:/AMB
-  lastModified: 637477023871609040
+  lastModified: 637477028018596937
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -416,7 +416,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/MX.bank
   Name: MX
   StudioPath: bank:/MX
-  lastModified: 637477023872509811
+  lastModified: 637476514757159512
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -462,7 +462,7 @@ MonoBehaviour:
   - {fileID: 5834665067868265062}
   StringsBanks:
   - {fileID: 7733917172719237594}
-  stringsBankWriteTime: 637477023872169515
+  stringsBankWriteTime: 637477028020356347
   cacheVersion: 6
 --- !u!114 &357077983792163556
 MonoBehaviour:
@@ -685,7 +685,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/DX.bank
   Name: DX
   StudioPath: bank:/DX
-  lastModified: 637477023871879265
+  lastModified: 637476459800314729
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -750,7 +750,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637477023872149496
+  lastModified: 637476459800324733
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -811,7 +811,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637477023873090310
+  lastModified: 637477028021495996
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -852,7 +852,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637477023872169515
+  lastModified: 637477028020356347
   LoadResult: 0
   FileSizes:
   - Name: Desktop
