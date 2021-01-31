@@ -22,6 +22,12 @@ public class WaitingOnPlayersState : FlowStateBase
         { 
             m_waitingUI.SetMessage($"Waiting on more players. There are currently {playerCount} players in the lobby out of 5");
         }
+
+        if(NetworkPlayerStatus.s_isHost == false && playerCount == 1)
+        {
+            NetworkPlayerStatus.s_isHost = true;
+            m_waitingUI.SetStartButtonActive(true);
+        }
     }
 
     protected override void HandleMessage(object message)
