@@ -10,7 +10,7 @@ public class WinnerCount : MonoBehaviour
         var player = other.GetComponent<PositionMono>();
         if (player != null && !player.IsSeeker)
         {
-            player.m_escaped = false;
+            player.m_escaped = true;
             ++s_winnerCount; 
         }
     }
@@ -20,7 +20,7 @@ public class WinnerCount : MonoBehaviour
         var player = other.GetComponent<PositionMono>();
         if (player != null && !player.IsSeeker)
         {
-            player.m_escaped = false;
+            player.m_escaped = true;
             --s_winnerCount; 
         }
     }
