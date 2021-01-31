@@ -2,19 +2,17 @@
 using Photon.Pun;
 using UnityEngine;
 
-public class PositionMono : MonoBehaviour, IPunObservable
+public class BallSerialiser : MonoBehaviour, IPunObservable
 {
-    public bool IsSeeker;
-    private Animator m_animator;
-    [HideInInspector] public Vector3 m_velocity;
+    private Rigidbody m_rigidbody;
     private Vector3 m_start;
     private Vector3 m_end;
     private float m_currentTime = 0;
     private float m_lag;
-
-    public void Awake()
+    
+    private void Awake()
     {
-        m_animator = GetComponent<Animator>();
+        m_rigidbody = GetComponent<Rigidbody>();
     }
 
     public void LateUpdate()
@@ -22,8 +20,6 @@ public class PositionMono : MonoBehaviour, IPunObservable
         if(Mathf.Abs(m_lag) > 0)
             transform.position = Vector3.Lerp(m_start, m_end, m_currentTime / m_lag);
         m_currentTime += Time.deltaTime;
-
-        m_animator.SetFloat("MovementSpeed", m_velocity.magnitude);
     }
 
     public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
@@ -31,18 +27,18 @@ public class PositionMono : MonoBehaviour, IPunObservable
         if (stream.IsWriting)
         {
             stream.SendNext(transform.position);
-            stream.SendNext(m_velocity);
-            stream.SendNext(transform.rotation);
+            stream.SendNext(m_rigidbody.velocity);
+            stream.SendNext(m_rigidbody.rotation);
         }
         else
         {
             Vector3 position = (Vector3)stream.ReceiveNext();
-            m_velocity = (Vector3) stream.ReceiveNext();
-            transform.rotation = (Quaternion)stream.ReceiveNext();
+            m_rigidbody.velocity = (Vector3) stream.ReceiveNext();
+            m_rigidbody.rotation = (Quaternion) stream.ReceiveNext();
 
             m_start = transform.position;
             m_lag = Mathf.Abs((float) (PhotonNetwork.Time - info.SentServerTime)) * 2f;
-            m_end = position + m_velocity * m_lag;
+            m_end = position + m_rigidbody.velocity * m_lag;
             m_currentTime = 0;
         }
     }

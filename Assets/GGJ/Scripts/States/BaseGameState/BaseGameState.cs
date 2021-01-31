@@ -1,7 +1,9 @@
+using System;
 using PersonalFramework;
 using Photon.Pun;
 using UnityEngine;
 using Photon.Realtime;
+using Random = UnityEngine.Random;
 
 public class BaseGameState : FlowStateBase
 {
@@ -25,6 +27,8 @@ public class BaseGameState : FlowStateBase
     private Vector3 m_cameraRotation;
     private Vector3 m_playerRotation;
     private bool Connected => m_player != null;
+
+    private LoserCount m_loserCount;
 
     public BaseGameState()
     {
@@ -56,9 +60,6 @@ public class BaseGameState : FlowStateBase
             GameObject player = PhotonNetwork.Instantiate("Player", startPos, Quaternion.identity);
             m_characterController = player.GetComponent<CharacterController>();
 
-            //Do we still want to be doing this??
-            player.FindChildByName("Box004").GetComponent<SkinnedMeshRenderer>().material.color = Random.ColorHSV();
-
             Camera playerCamera = Camera.main;
             var transform = playerCamera.transform;
 
@@ -80,6 +81,8 @@ public class BaseGameState : FlowStateBase
             string dataName = playerInformation.m_isSeeker ? "Seeker" : "Hider";
             m_localPlayerData = Resources.Load<PlayerData>($"PlayerData/{dataName}Data");
 
+            m_positionMono.IsSeeker = m_isSeeker;
+
             EndPresentingState();
         }
     }
@@ -88,16 +91,21 @@ public class BaseGameState : FlowStateBase
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        m_teleportManager.Initialise(m_positionMono);
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        
+        if ( m_isSeeker )
         {
-            var ball = PhotonNetwork.Instantiate("Ball",m_player.position + Vector3.up + m_playerCamera.transform.forward * 1.5f, Quaternion.identity);
+            var ball = GameObject.Find("Ball");
             m_ball = ball.GetComponent<Rigidbody>();
+            ball.GetComponent<PhotonView>().RequestOwnership();
             ball.transform.SetParent(m_ballAttachTransform,true);
             ball.transform.localPosition = Vector3.zero;
             m_ballHeld = true;
             m_ball.isKinematic = true;
         }
+        
+        m_teleportManager.Initialise(m_positionMono);
+
+        m_loserCount = GameObject.Find("LosersBox").GetComponent<LoserCount>();
     }
 
     protected override void UpdateActiveState()
@@ -114,27 +122,36 @@ public class BaseGameState : FlowStateBase
         LeverSystem.UpdateLeverInteractions(m_player, PlayerMovement.GetCurrentHeight(m_playerMovementState, m_localPlayerData), m_inputKeys);
         UpdatePowerUps(deltaTime);
 
-        if (Input.GetMouseButton(0) && m_ballHeld)
+        if (m_isSeeker)
         {
-            m_ball.isKinematic = false;
-            m_ball.AddForce(m_playerCamera.transform.forward * 130);
-            m_ball.transform.SetParent(null,true);
-            m_ballHeld = false;
-            m_catchBallTimer = 0.8f;
+            if (Input.GetMouseButton(0) && m_ballHeld)
+            {
+                m_ball.isKinematic = false;
+                m_ball.AddForce(m_playerCamera.transform.forward * 130);
+                m_ball.transform.SetParent(null,true);
+                m_ballHeld = false;
+                m_catchBallTimer = 0.8f;
+            }
+
+            if (m_catchBallTimer > 0)
+            {
+                m_catchBallTimer -= Time.deltaTime;
+            }
+
+            if (m_ballHeld == false && m_catchBallTimer < 0 && m_ball != null && Vector3.Distance(m_ball.transform.position.CopyWithY(0),m_player.position.CopyWithY(0)) < 1.5f && Mathf.Abs(m_ball.transform.position.y-m_player.transform.position.y) < 1f)
+            {
+                m_ball.transform.SetParent(m_ballAttachTransform,true);
+                m_ball.transform.localPosition = Vector3.zero;
+                m_ballHeld = true;
+                m_ball.velocity = Vector3.zero;
+                m_ball.isKinematic = true;
+            }
         }
 
-        if (m_catchBallTimer > 0)
+        if (PhotonNetwork.CurrentRoom.PlayerCount != 1 && m_loserCount.m_loserCount == PhotonNetwork.CurrentRoom.PlayerCount - 1)
         {
-            m_catchBallTimer -= Time.deltaTime;
-        }
-
-        if (m_ballHeld == false && m_catchBallTimer < 0 && m_ball != null && Vector3.Distance(m_ball.transform.position.CopyWithY(0),m_player.position.CopyWithY(0)) < 1.5f && Mathf.Abs(m_ball.transform.position.y-m_player.transform.position.y) < 1f)
-        {
-            m_ball.transform.SetParent(m_ballAttachTransform,true);
-            m_ball.transform.localPosition = Vector3.zero;
-            m_ballHeld = true;
-            m_ball.velocity = Vector3.zero;
-            m_ball.isKinematic = true;
+            Debug.Log("Seeker Wins");
+            ControllingStateStack.ChangeState(new ErrorState(m_isSeeker ? "Congrats you Win!" : "LOSER!"));
         }
     }
 
