@@ -132,4 +132,5 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_timeAffecting: 8
+  m_timeBeforeRespawn: 15
   m_speedMultiplier: 2
