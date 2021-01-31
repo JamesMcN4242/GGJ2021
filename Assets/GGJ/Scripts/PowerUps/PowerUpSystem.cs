@@ -24,7 +24,8 @@ public static class PowerUpSystem
 
     public static (bool hitPowerUp, PowerUpData powerUpData) GetIntersectingPowerUp(Transform player, Vector3 playerSize)
     {
-        Collider[] colliders = Physics.OverlapBox(player.position, playerSize * 0.5f, player.rotation, int.MaxValue, QueryTriggerInteraction.Collide);
+        //We made him super tall since we were running into issues, I regret nothing.
+        Collider[] colliders = Physics.OverlapBox(player.position, playerSize.CopyWithY(200.0f), player.rotation, int.MaxValue, QueryTriggerInteraction.Collide);
         foreach (Collider col in colliders)
         {
             PowerUpMono powerUp = col.GetComponent<PowerUpMono>();
