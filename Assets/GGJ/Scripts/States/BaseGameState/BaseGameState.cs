@@ -104,6 +104,7 @@ public class BaseGameState : FlowStateBase
         float speedModifier = m_powerUpData.m_type == PowerUpTypes.SPEED_BOOST ? m_powerUpData.m_affectingValue : 1.0f;
         PlayerMovement.MovePlayer(m_characterController, m_player, m_playerCameraTrans, input, m_localPlayerData, m_playerMovementState, m_positionMono, speedModifier, deltaTime);
         CameraSystem.UpdateCameraRotation(m_player,ref m_playerRotation,m_playerCameraTrans, ref m_cameraRotation);
+        LeverSystem.UpdateLeverInteractions(m_player, PlayerMovement.GetCurrentHeight(m_playerMovementState, m_localPlayerData), m_inputKeys);
         UpdatePowerUps(deltaTime);
 
         if (Input.GetMouseButton(0) && m_ballHeld)
