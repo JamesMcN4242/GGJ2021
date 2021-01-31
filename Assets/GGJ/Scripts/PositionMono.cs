@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class PositionMono : MonoBehaviour, IPunObservable
 {
+    public bool IsSeeker;
+    
     public Vector3 m_velocity;
     public Vector3 m_start;
     public Vector3 m_end;

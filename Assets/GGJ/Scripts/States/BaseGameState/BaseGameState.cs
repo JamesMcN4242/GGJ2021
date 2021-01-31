@@ -47,8 +47,7 @@ public class BaseGameState : FlowStateBase
             Vector3 startPos = GameObject.Find(playerInformation.m_spawnPos).transform.position;
             GameObject player = PhotonNetwork.Instantiate("Player", startPos, Quaternion.identity);
             player.GetComponent<MeshRenderer>().material.color = Random.ColorHSV();
-
-
+            
             Camera playerCamera = Camera.main;
             var transform = playerCamera.transform;
 
@@ -70,6 +69,8 @@ public class BaseGameState : FlowStateBase
             string dataName = playerInformation.m_isSeeker ? "Seeker" : "Hider";
             m_localPlayerData = Resources.Load<PlayerData>($"PlayerData/{dataName}Data");
 
+            m_positionMono.IsSeeker = m_isSeeker;
+
             EndPresentingState();
         }
     }
@@ -78,16 +79,19 @@ public class BaseGameState : FlowStateBase
     {
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
-        m_teleportManager.Initialise(m_positionMono);
-        if (PhotonNetwork.CurrentRoom.PlayerCount == 1)
+        
+        if ( m_isSeeker )
         {
-            var ball = PhotonNetwork.Instantiate("Ball",m_player.position + Vector3.up + m_playerCamera.transform.forward * 1.5f, Quaternion.identity);
+            var ball = GameObject.Find("Ball");
             m_ball = ball.GetComponent<Rigidbody>();
+            ball.GetComponent<PhotonView>().RequestOwnership();
             ball.transform.SetParent(m_ballAttachTransform,true);
             ball.transform.localPosition = Vector3.zero;
             m_ballHeld = true;
             m_ball.isKinematic = true;
         }
+        
+        m_teleportManager.Initialise(m_positionMono);
     }
 
     protected override void UpdateActiveState()
@@ -103,27 +107,30 @@ public class BaseGameState : FlowStateBase
         CameraSystem.UpdateCameraRotation(m_player,ref m_playerRotation,m_playerCameraTrans, ref m_cameraRotation);
         UpdatePowerUps(deltaTime);
 
-        if (Input.GetMouseButton(0) && m_ballHeld)
+        if (m_isSeeker)
         {
-            m_ball.isKinematic = false;
-            m_ball.AddForce(m_playerCamera.transform.forward * 130);
-            m_ball.transform.SetParent(null,true);
-            m_ballHeld = false;
-            m_catchBallTimer = 0.8f;
-        }
+            if (Input.GetMouseButton(0) && m_ballHeld)
+            {
+                m_ball.isKinematic = false;
+                m_ball.AddForce(m_playerCamera.transform.forward * 130);
+                m_ball.transform.SetParent(null,true);
+                m_ballHeld = false;
+                m_catchBallTimer = 0.8f;
+            }
 
-        if (m_catchBallTimer > 0)
-        {
-            m_catchBallTimer -= Time.deltaTime;
-        }
+            if (m_catchBallTimer > 0)
+            {
+                m_catchBallTimer -= Time.deltaTime;
+            }
 
-        if (m_ballHeld == false && m_catchBallTimer < 0 && m_ball != null && Vector3.Distance(m_ball.transform.position.CopyWithY(0),m_player.position.CopyWithY(0)) < 1.5f && Mathf.Abs(m_ball.transform.position.y-m_player.transform.position.y) < 1f)
-        {
-            m_ball.transform.SetParent(m_ballAttachTransform,true);
-            m_ball.transform.localPosition = Vector3.zero;
-            m_ballHeld = true;
-            m_ball.velocity = Vector3.zero;
-            m_ball.isKinematic = true;
+            if (m_ballHeld == false && m_catchBallTimer < 0 && m_ball != null && Vector3.Distance(m_ball.transform.position.CopyWithY(0),m_player.position.CopyWithY(0)) < 1.5f && Mathf.Abs(m_ball.transform.position.y-m_player.transform.position.y) < 1f)
+            {
+                m_ball.transform.SetParent(m_ballAttachTransform,true);
+                m_ball.transform.localPosition = Vector3.zero;
+                m_ballHeld = true;
+                m_ball.velocity = Vector3.zero;
+                m_ball.isKinematic = true;
+            }
         }
     }
 
