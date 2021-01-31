@@ -159,11 +159,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e05524af46c242c4a164e01eae525eab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  IsSeeker: 0
   m_velocity: {x: 0, y: 0, z: 0}
-  m_start: {x: 0, y: 0, z: 0}
-  m_end: {x: 0, y: 0, z: 0}
-  m_currentTime: 0
-  m_lag: 0
 --- !u!114 &5731455517366906706
 MonoBehaviour:
   m_ObjectHideFlags: 0
