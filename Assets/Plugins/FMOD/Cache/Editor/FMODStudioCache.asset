@@ -46,29 +46,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 1842
---- !u!114 &-7300751945427772577
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/X-Ray Power Up
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/X-Ray Power Up
-  guid: 09faedac3b5679418c049e840376872e
-  Banks:
-  - {fileID: 7496420574565804509}
-  IsStream: 0
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 2000
 --- !u!114 &-7176812156898015630
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -203,29 +180,6 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1404
---- !u!114 &-5707168608961619456
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/SFX/Fire Torch
-  m_EditorClassIdentifier: 
-  Path: event:/SFX/Fire Torch
-  guid: 067c0f38b383214993483b07b5aab106
-  Banks:
-  - {fileID: 7496420574565804509}
-  IsStream: 1
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 15787
 --- !u!114 &-4244808310594018176
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -241,7 +195,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/FLY.bank
   Name: FLY
   StudioPath: bank:/FLY
-  lastModified: 637476501708686312
+  lastModified: 637476459800314729
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -259,7 +213,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: event:/FLY/Seeker Footstep (run)
   guid: 300dccc3b5bc1b42957e7be9ea729694
-  Banks: []
+  Banks:
+  - {fileID: -4244808310594018176}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -331,30 +286,23 @@ MonoBehaviour:
   - {fileID: -4244808310594018176}
   - {fileID: 5834665067868265062}
   - {fileID: 7496420574565804509}
-  - {fileID: 2441735216447333582}
-  - {fileID: 4567650994323491318}
   EditorEvents:
   - {fileID: -5932196306568139418}
   - {fileID: -2421409791036135502}
   - {fileID: 357077983792163556}
   - {fileID: 969294326169799428}
   - {fileID: 8531720248210736121}
+  - {fileID: -3479087975325775146}
   - {fileID: 7962910889988169877}
   - {fileID: -6539602732042058139}
   - {fileID: 1463022810661945069}
   - {fileID: 5210147265277829416}
-  - {fileID: 4557400218280076994}
-  - {fileID: 7426525008158608452}
-  - {fileID: 389243488495321184}
-  - {fileID: -5707168608961619456}
-  - {fileID: -7300751945427772577}
-  - {fileID: 8446231027498346966}
   EditorParameters: []
   MasterBanks:
   - {fileID: 5834665067868265062}
   StringsBanks:
   - {fileID: 7733917172719237594}
-  stringsBankWriteTime: 637476501708776395
+  stringsBankWriteTime: 637476459800324733
   cacheVersion: 6
 --- !u!114 &357077983792163556
 MonoBehaviour:
@@ -379,29 +327,6 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 2359
---- !u!114 &389243488495321184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/MX/Menu_Music
-  m_EditorClassIdentifier: 
-  Path: event:/MX/Menu_Music
-  guid: bca1d16c53919f48bee6fe5f831d423f
-  Banks:
-  - {fileID: 4567650994323491318}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 245995
 --- !u!114 &969294326169799428
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -471,25 +396,6 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 2385
---- !u!114 &2441735216447333582
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/AMB.bank
-  m_EditorClassIdentifier: 
-  Path: FMOD Session/Build/Desktop/AMB.bank
-  Name: AMB
-  StudioPath: bank:/AMB
-  lastModified: 637476501707375130
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
 --- !u!114 &2516357297574530052
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -536,48 +442,6 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 1066
---- !u!114 &4557400218280076994
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/AMB/Ambience
-  m_EditorClassIdentifier: 
-  Path: event:/AMB/Ambience
-  guid: cfb89f01f713414d81b3da5c13cb4126
-  Banks:
-  - {fileID: 2441735216447333582}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 1
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 68824
---- !u!114 &4567650994323491318
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
-  m_Name: bank:/MX.bank
-  m_EditorClassIdentifier: 
-  Path: FMOD Session/Build/Desktop/MX.bank
-  Name: MX
-  StudioPath: bank:/MX
-  lastModified: 637476501754589859
-  LoadResult: 0
-  FileSizes: []
-  Exists: 1
 --- !u!114 &4888474476953040657
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,7 +457,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/DX.bank
   Name: DX
   StudioPath: bank:/DX
-  lastModified: 637476501708476121
+  lastModified: 637476459800314729
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -658,7 +522,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/Master.bank
   Name: Master
   StudioPath: bank:/Master
-  lastModified: 637476501708736358
+  lastModified: 637476459800324733
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -681,29 +545,6 @@ MonoBehaviour:
   LoadResult: 0
   FileSizes: []
   Exists: 1
---- !u!114 &7426525008158608452
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/FLY/Footstep (run)
-  m_EditorClassIdentifier: 
-  Path: event:/FLY/Footstep (run)
-  guid: 300dccc3b5bc1b42957e7be9ea729694
-  Banks:
-  - {fileID: -4244808310594018176}
-  IsStream: 0
-  Is3D: 1
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 1
-  MaxDistance: 20
-  Length: 350
 --- !u!114 &7496420574565804509
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -719,7 +560,7 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/SFX.bank
   Name: SFX
   StudioPath: bank:/SFX
-  lastModified: 637476501860080557
+  lastModified: 637476459800344718
   LoadResult: 0
   FileSizes: []
   Exists: 1
@@ -738,11 +579,11 @@ MonoBehaviour:
   Path: FMOD Session/Build/Desktop/Master.strings.bank
   Name: Master.strings
   StudioPath: bank:/Master.strings
-  lastModified: 637476501708776395
+  lastModified: 637476459800324733
   LoadResult: 0
   FileSizes:
   - Name: Desktop
-    Value: 1592
+    Value: 1300
   Exists: 1
 --- !u!114 &7763875090922332385
 MonoBehaviour:
@@ -786,29 +627,6 @@ MonoBehaviour:
   MinDistance: 1
   MaxDistance: 20
   Length: 2383
---- !u!114 &8446231027498346966
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ceb653cd98e289a4e8697a1af55201f2, type: 3}
-  m_Name: event:/AMB/Wind
-  m_EditorClassIdentifier: 
-  Path: event:/AMB/Wind
-  guid: d1d58beb45a118438748585d41f01690
-  Banks:
-  - {fileID: 7496420574565804509}
-  IsStream: 1
-  Is3D: 0
-  IsOneShot: 0
-  Parameters: []
-  MinDistance: 0
-  MaxDistance: 0
-  Length: 20000
 --- !u!114 &8531720248210736121
 MonoBehaviour:
   m_ObjectHideFlags: 0
