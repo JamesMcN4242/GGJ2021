@@ -9,9 +9,12 @@ public class TeleportManager
     public bool m_active = true;
     public int exitCount = 0;
 
+    private CharacterController m_characterController;
+
     public void Initialise(PositionMono player)
     {
         m_player = player;
+        m_characterController = m_player.GetComponent<CharacterController>();
         for (var i = 0; i < m_buckets.Length; i++)
         {
             m_buckets[i] = new List<TeleporterMono>();
@@ -41,7 +44,10 @@ public class TeleportManager
                         cp.RemoveAt(i);
                 }
                 int index = Random.Range(0, cp.Count);
+
+                m_characterController.enabled = false;
                 mono.transform.position = cp[index].transform.position;
+                m_characterController.enabled = true;
             }
         }
     }

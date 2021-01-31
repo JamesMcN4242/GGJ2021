@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PositionMono : MonoBehaviour, IPunObservable
 {
-    public bool IsSeeker;
+    public bool IsSeeker = false;
     private Animator m_animator;
     [HideInInspector] public Vector3 m_velocity;
     private Vector3 m_start;
