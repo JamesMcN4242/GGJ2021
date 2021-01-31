@@ -3,8 +3,7 @@ using UnityEngine;
 
 public class PlayerAudioMovement : MonoBehaviour
 {
-    [EventRef] public string m_inputWalkSound;
-    [EventRef] public string m_inputRunSound;
+    [EventRef] public string m_inputSound;
     public float m_secondsBetweenSFX = 2.0f;
 
     public float m_walkingSpeed;
@@ -20,8 +19,8 @@ public class PlayerAudioMovement : MonoBehaviour
             m_timePassed += Time.deltaTime;
             if (m_timePassed >= m_secondsBetweenSFX)
             {
-                string inputSound = m_walkingSpeed > 5.0f ? m_inputRunSound : m_inputWalkSound;
-                RuntimeManager.PlayOneShotAttached(inputSound, gameObject);
+           
+                RuntimeManager.PlayOneShotAttached(m_inputSound, gameObject);
                 m_timePassed = 0.0f;
             }
         }
