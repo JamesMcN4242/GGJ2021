@@ -27,7 +27,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1887656197556930137}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2.9279366, y: 17.5, z: 45.11004}
+  m_LocalPosition: {x: -3, y: 17.5, z: 45}
   m_LocalScale: {x: 10, y: 35, z: 80}
   m_Children: []
   m_Father: {fileID: 7138920214895313245}
@@ -393,7 +393,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6141122909408977420}
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -2.9279366, y: 17.5, z: -44.157722}
+  m_LocalPosition: {x: -2.9279366, y: 17.5, z: -44}
   m_LocalScale: {x: 10, y: 35, z: 80}
   m_Children: []
   m_Father: {fileID: 7138920214895313245}
@@ -525,6 +525,7 @@ GameObject:
   - component: {fileID: 7685646825750218442}
   - component: {fileID: 4545489337164343363}
   - component: {fileID: 3331496467075435308}
+  - component: {fileID: 3450690494123190581}
   m_Layer: 0
   m_Name: Roof
   m_TagString: Untagged
@@ -567,6 +568,47 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7012504429476376326}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!23 &3450690494123190581
+MeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7012504429476376326}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 2
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: f0885fb6a6c56c946a6caf34677b14dd, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_AdditionalVertexStreams: {fileID: 0}
 --- !u!1 &8668485935514528378
 GameObject:
   m_ObjectHideFlags: 0
@@ -594,7 +636,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8668485935514528378}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -46.5, y: 17.5, z: 0}
+  m_LocalPosition: {x: -46, y: 17.5, z: 0}
   m_LocalScale: {x: 10, y: 35, z: 80}
   m_Children: []
   m_Father: {fileID: 7138920214895313245}
