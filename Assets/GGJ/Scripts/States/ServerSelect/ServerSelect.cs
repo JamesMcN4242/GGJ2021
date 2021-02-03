@@ -53,7 +53,7 @@ public class ServerSelect : FlowStateBase
             {
                 if (msg.StartsWith("Room", StringComparison.Ordinal))
                 {
-                    PhotonNetwork.JoinRoom(msg);
+                    PhotonNetwork.JoinRoom(msg); // todo: this is actually broke as shit, if 4 rooms exist and room 3 timesout the next room created will be room 4 which will be a duplicate. Need a better way of creating rooms...
                     // Todo: Move to a new state or wait in this state until room joined?
                 }
                 else
