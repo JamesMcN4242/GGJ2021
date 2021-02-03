@@ -1,4 +1,6 @@
 ﻿using PersonalFramework;
+using Photon.Pun;
+using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -7,9 +9,21 @@ public class MainMenuState : FlowStateBase
 {
     private UIMainMenu m_uiMainMenu;
     private float k_maxFadeTime = 1;
-    private float m_currentTime = 0;
-    private Image m_curtain;
-    
+    private float m_currentTime;
+
+    protected override void StartPresentingState()
+    {
+        m_uiMainMenu.OnDisconnect();
+        EndPresentingState();
+    }
+
+    protected override void StartActiveState()
+    {
+        Debug.Log("Initialising Connection with Photon!");
+        bool connected = PhotonNetwork.ConnectUsingSettings();
+        Debug.Assert(connected, "Can't Connect to photon!"); // todo: check this may be a bad idea to assert
+    }
+
     protected override bool AquireUIFromScene()
     {
         m_uiMainMenu = GameObject.Find("UIMainMenu").GetComponent<UIMainMenu>();
@@ -46,7 +60,24 @@ public class MainMenuState : FlowStateBase
         if (m_currentTime > k_maxFadeTime)
         {
             EndDismissingState();
-            SceneManager.LoadScene("Game");
         }
     }
+
+    #region Photon
+    
+    public override void OnConnectedToMaster()
+    {
+        Debug.Log("OnConnectedToMaster() was called by PUN.");
+        m_uiMainMenu.OnConnected();
+    }
+    
+    public override void OnDisconnected(DisconnectCause cause)
+    {
+        string msg = $"Disconnected From Server: {cause}";
+        Debug.Log(msg);
+        m_uiMainMenu.OnDisconnect();
+        PhotonNetwork.Reconnect();
+    }
+
+    #endregion
 }

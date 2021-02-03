@@ -60,76 +60,94 @@ namespace PersonalFramework
             }
         }
         
-        public virtual void OnConnected()
+        public void OnConnected()
         {
             var state = m_stateStack.Peek();
             state.OnConnected();
         }
 
-        public virtual void OnConnectedToMaster()
+        public void OnConnectedToMaster()
         {
             var state = m_stateStack.Peek();
             state.OnConnectedToMaster();
         }
 
-        public virtual void OnDisconnected(DisconnectCause cause)
+        public void OnDisconnected(DisconnectCause cause)
         {
             var state = m_stateStack.Peek();
             state.OnDisconnected(cause);
         }
 
-        public virtual void OnRegionListReceived(RegionHandler regionHandler)
+        public void OnRegionListReceived(RegionHandler regionHandler)
         {
             var state = m_stateStack.Peek();
             state.OnRegionListReceived(regionHandler);
         }
 
-        public virtual void OnCustomAuthenticationResponse(Dictionary<string, object> data)
+        public void OnCustomAuthenticationResponse(Dictionary<string, object> data)
         {
             var state = m_stateStack.Peek();
             state.OnCustomAuthenticationResponse(data);
         }
 
-        public virtual void OnCustomAuthenticationFailed(string debugMessage)
+        public void OnCustomAuthenticationFailed(string debugMessage)
         {
             var state = m_stateStack.Peek();
             state.OnCustomAuthenticationFailed(debugMessage);
         }
         
-        public virtual void OnCreatedRoom()
+        public void OnCreatedRoom()
         {
             var state = m_stateStack.Peek();
             state.OnCreatedRoom();
         }
 
-        public virtual void OnCreateRoomFailed(short returnCode, string message)
+        public void OnCreateRoomFailed(short returnCode, string message)
         {
             var state = m_stateStack.Peek();
             state.OnCreateRoomFailed(returnCode,message);
         }
 
-        public virtual void OnJoinedRoom()
+        public void OnJoinedRoom()
         {
             var state = m_stateStack.Peek();
             state.OnJoinedRoom();
         }
 
-        public virtual void OnJoinRoomFailed(short returnCode, string message)
+        public void OnJoinRoomFailed(short returnCode, string message)
         {
             var state = m_stateStack.Peek();
             state.OnJoinRandomFailed(returnCode,message);
         }
 
-        public virtual void OnJoinRandomFailed(short returnCode, string message)
+        public void OnJoinRandomFailed(short returnCode, string message)
         {
             var state = m_stateStack.Peek();
             state.OnJoinRandomFailed(returnCode,message);
         }
 
-        public virtual void OnLeftRoom()
+        public void OnLeftRoom()
         {
             var state = m_stateStack.Peek();
             state.OnLeftRoom();
+        }
+        
+        public void OnJoinedLobby()
+        {
+            var state = m_stateStack.Peek();
+            state.OnJoinedLobby();
+        }
+
+        public void OnLeftLobby()
+        {
+            var state = m_stateStack.Peek();
+            state.OnLeftLobby();
+        }
+
+        public void OnRoomListUpdate(List<RoomInfo> roomList)
+        {
+            var state = m_stateStack.Peek();
+            state.OnRoomListUpdate(roomList);
         }
     }
 }

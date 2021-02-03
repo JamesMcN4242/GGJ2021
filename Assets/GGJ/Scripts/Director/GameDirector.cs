@@ -50,7 +50,6 @@ public class GameDirector : LocalDirector, IConnectionCallbacks, IMatchmakingCal
     {
         m_stateController.OnCustomAuthenticationFailed(debugMessage);
     }
-    #endregion
 
     public void OnFriendListUpdate(List<FriendInfo> friendList)
     {
@@ -90,4 +89,5 @@ public class GameDirector : LocalDirector, IConnectionCallbacks, IMatchmakingCal
     {
         PhotonNetwork.RemoveCallbackTarget(this);
     }
+    #endregion
 }
