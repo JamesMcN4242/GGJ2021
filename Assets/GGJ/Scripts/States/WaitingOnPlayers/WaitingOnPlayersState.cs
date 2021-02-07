@@ -1,6 +1,7 @@
 using PersonalFramework;
 using Photon.Pun;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class WaitingOnPlayersState : FlowStateBase
@@ -9,6 +10,14 @@ public class WaitingOnPlayersState : FlowStateBase
     private Image m_curtain;
     private float m_remainingTime;
     private float m_maxFadeTime = 1;
+
+    enum NextState
+    {
+        GAME,
+        MENU
+    }
+
+    private NextState m_nextState;
 
     protected override void StartPresentingState()
     {
@@ -42,15 +51,27 @@ public class WaitingOnPlayersState : FlowStateBase
         if (m_remainingTime < 0)
         {
             EndDismissingState();
+            if (m_nextState == NextState.MENU)
+            {
+                SceneManager.LoadScene("MainMenu");
+            }
         }
     }
 
     protected override void HandleMessage(object message)
     {
-        if(message is string msg && msg == "ForceStart")
+        if(message is string msg)
         {
-            m_remainingTime = m_maxFadeTime;
-            ControllingStateStack.ChangeState(new BaseGameState());
+            if(msg == "ForceStart")
+            {
+                m_remainingTime = m_maxFadeTime;
+                ControllingStateStack.ChangeState(new BaseGameState());
+                m_nextState = NextState.GAME;
+            } 
+            else if (msg == "BACK_TO_MENU")
+            {
+                PhotonNetwork.LeaveRoom(false);
+            }
         }
     }
 
@@ -59,5 +80,12 @@ public class WaitingOnPlayersState : FlowStateBase
         m_waitingUI = Object.FindObjectOfType<WaitingOnPlayersUI>();
         m_ui = m_waitingUI;
         return m_ui != null;
+    }
+
+    public override void OnLeftRoom()
+    {
+        m_remainingTime = m_maxFadeTime;
+        EndActiveState();
+        m_nextState = NextState.MENU;
     }
 }
