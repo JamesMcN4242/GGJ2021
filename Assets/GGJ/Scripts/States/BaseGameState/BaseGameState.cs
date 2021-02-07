@@ -222,7 +222,6 @@ public class BaseGameState : FlowStateBase
             LoserCount.s_loserCount = 0;
             WinnerCount.s_winnerCount = 0;
             CleanUp();
-            PhotonNetwork.LeaveRoom(false);
         }
         
         Shader.SetGlobalVector("Vector3_94154db5f30644be99f99d0fb94af7dae",m_globalBall.position);
