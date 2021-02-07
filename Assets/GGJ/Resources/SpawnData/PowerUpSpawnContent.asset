@@ -1,21 +1,3 @@
-%YAML 1.1
-%TAG !u! tag:unity3d.com,2011:
---- !u!114 &11400000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc63c2462b2847b4da1b6ae6899c8504, type: 3}
-  m_Name: PowerUpSpawnContent
-  m_EditorClassIdentifier: 
-  m_powerUpsToSpawn:
-  - m_powerUpType: 2
-    m_powerUpPrefabPath: PowerUpPrefabs/SpeedBoostPowerUp
-    m_numberToSpawn: 2
-  - m_powerUpType: 1
-    m_powerUpPrefabPath: PowerUpPrefabs/XRayPowerUp
-    m_numberToSpawn: 2
+version https://git-lfs.github.com/spec/v1
+oid sha256:e0dbd68b5f044f9dcc385c78f4dbb80fb3eb50c96f97a90f3e6ee4ddb7e27060
+size 627

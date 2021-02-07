@@ -84,6 +84,7 @@ public class ServerSelect : FlowStateBase
                                 IsOpen = true
                             };
                             PhotonNetwork.JoinOrCreateRoom($"Room {System.Guid.NewGuid()}", options, TypedLobby.Default);
+                            NetworkPlayerStatus.s_isHost = true;
                             break;
                         case "BACK_TO_MENU":
                             ControllingStateStack.ChangeState(new MainMenuState());

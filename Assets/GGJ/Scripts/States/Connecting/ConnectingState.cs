@@ -21,16 +21,25 @@ public class ConnectingState : FlowStateBase
 
     protected override void StartPresentingState()
     {
-        bool connected = PhotonNetwork.ConnectUsingSettings();
-        Assert.IsTrue(connected, "Can't Connect to photon!");
+        if(!PhotonNetwork.IsConnected)
+        {
+            bool connected = PhotonNetwork.ConnectUsingSettings();
+            Assert.IsTrue(connected, "Can't Connect to photon!");
+        }
+
         m_curtain = GameObject.Find("Curtain").GetComponent<Image>();
         m_curtain.color = Color.black;
-        EndPresentingState();
     }
+
+
 
     protected override void UpdateActiveState()
     {
         m_uiConnecting.UpdateText();
+        if(PhotonNetwork.IsConnected)
+        {
+            ControllingStateStack.ChangeState(new WaitingOnPlayersState());
+        }
     }
 
     protected override void UpdateDismissingState()
@@ -49,8 +58,6 @@ public class ConnectingState : FlowStateBase
     public override void OnCreatedRoom()
     {
         Debug.Log("Room Created.");
-        SpawnSystem.SpawnPowerUps();
-        NetworkPlayerStatus.s_isHost = true;
     }
 
     public override void OnJoinedRoom()

@@ -1,5 +1,4 @@
 ﻿using PersonalFramework;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
