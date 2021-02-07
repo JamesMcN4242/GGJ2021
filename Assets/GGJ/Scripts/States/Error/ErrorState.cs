@@ -7,10 +7,12 @@ public class ErrorState : FlowStateBase
 {
     private string m_message;
     private UIError m_uiError;
+    private bool m_showReconnect;
     
-    public ErrorState(string message)
+    public ErrorState(string message, bool showReconnect = true)
     {
         m_message = message;
+        m_showReconnect = showReconnect;
     }
 
     protected override bool AquireUIFromScene()
@@ -23,6 +25,7 @@ public class ErrorState : FlowStateBase
 
     protected override void StartPresentingState()
     {
+        m_uiError.ShowReconnect(m_showReconnect);
         m_uiError.SetMessage(m_message);
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.None;

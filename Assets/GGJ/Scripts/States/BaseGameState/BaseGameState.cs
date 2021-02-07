@@ -192,31 +192,31 @@ public class BaseGameState : FlowStateBase
             {
                 if (LoserCount.s_loserCount == 0)
                 {
-                    ControllingStateStack.ChangeState(new ErrorState("You failed to catch any of the hiders!"));    
+                    ControllingStateStack.ChangeState(new ErrorState("You failed to catch any of the hiders!",false));    
                 }
                 else if (WinnerCount.s_winnerCount == 0)
                 {
-                    ControllingStateStack.ChangeState(new ErrorState("Congrats you caught all the hiders!"));
+                    ControllingStateStack.ChangeState(new ErrorState("Congrats you caught all the hiders!",false));
                 }
                 else
                 {
-                    ControllingStateStack.ChangeState(new ErrorState($"Catching {LoserCount.s_loserCount} hiders is good, all {LoserCount.s_loserCount+WinnerCount.s_winnerCount} is better."));
+                    ControllingStateStack.ChangeState(new ErrorState($"Catching {LoserCount.s_loserCount} hiders is good, all {LoserCount.s_loserCount+WinnerCount.s_winnerCount} is better.",false));
                 }
             }
             else
             {
                 if (m_positionMono.m_escaped)
                 {
-                    ControllingStateStack.ChangeState(new ErrorState("Congrats you survived!"));
+                    ControllingStateStack.ChangeState(new ErrorState("Congrats you survived!",false));
                 }
                 else
                 {
-                    ControllingStateStack.ChangeState(new ErrorState("You failed to escape, you're doomed for eternity."));
+                    ControllingStateStack.ChangeState(new ErrorState("You failed to escape, you're doomed for eternity.",false));
                 }
             }
         }
         
-        Shader.SetGlobalVector("Vector3_94154db5f30644be99f99d0fb94af7da",m_globalBall.position);
+        Shader.SetGlobalVector("Vector3_94154db5f30644be99f99d0fb94af7dae",m_globalBall.position);
 
         m_baseGameUI.UpdateDoorButtonText(m_doorMono.m_leversInUse);
     }

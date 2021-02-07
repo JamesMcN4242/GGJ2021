@@ -10,6 +10,11 @@ public class UIError : UIStateBase
         m_message = gameObject.FindChildByName("Message").GetComponent<TMP_Text>();
     }
 
+    public void ShowReconnect(bool show)
+    {
+        gameObject.FindChildByName("Reconnect").SetActive(show);
+    }
+    
     public void SetMessage(string message)
     {
         m_message.text = message;
