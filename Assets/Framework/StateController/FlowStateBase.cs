@@ -247,5 +247,17 @@ namespace PersonalFramework
         public virtual void OnLeftRoom()
         {
         }
+        
+        public virtual void OnJoinedLobby()
+        {
+        }
+
+        public virtual void OnLeftLobby()
+        {
+        }
+
+        public virtual void OnRoomListUpdate(List<RoomInfo> roomList)
+        {
+        }
     }
 }

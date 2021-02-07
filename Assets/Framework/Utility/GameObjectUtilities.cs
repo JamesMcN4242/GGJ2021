@@ -3,9 +3,11 @@
 /////   James McNeil - 2019
 ////////////////////////////////////////////////////////////
 
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace PersonalFramework
 {
@@ -29,7 +31,7 @@ namespace PersonalFramework
             {
                 GameObject child = go.transform.GetChild(i).gameObject;
 
-                if (child.name == childName)
+                if (child.name.Equals(childName,StringComparison.Ordinal))
                 {
                     return child;
                 }

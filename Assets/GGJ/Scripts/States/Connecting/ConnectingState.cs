@@ -44,23 +44,7 @@ public class ConnectingState : FlowStateBase
     }
 
     #region Photon
-    public override void OnConnected()
-    {
-        Debug.Log("OnConnected() was called by PUN.");
-    }
-
-    public override void OnConnectedToMaster()
-    {
-        Debug.Log("OnConnectedToMaster() was called by PUN.");
-
-        RoomOptions options = new RoomOptions()
-        {
-            IsVisible = false,
-            IsOpen = true,
-            MaxPlayers = 6
-        };
-        PhotonNetwork.JoinOrCreateRoom("TestRoom", options, TypedLobby.Default);
-    }
+    
     
     public override void OnCreatedRoom()
     {
