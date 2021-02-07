@@ -41,7 +41,7 @@ public class BaseGameState : FlowStateBase
     {
         m_inputKeys = InputKeyManagement.GetSavedOrDefaultKeyCodes();
         if(NetworkPlayerStatus.s_isHost)
-        {
+        {         
             GameObject obj = PhotonNetwork.Instantiate("NetworkedPlayerInfo", Vector3.zero, Quaternion.identity);
             obj.GetComponent<NetworkedPlayerInfo>().SetUpFromPlayers();
         }
@@ -56,6 +56,11 @@ public class BaseGameState : FlowStateBase
 
     protected override void StartPresentingState()
     {
+        if (NetworkPlayerStatus.s_isHost)
+        {
+            SpawnSystem.SpawnPowerUps();
+        }
+
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
@@ -214,6 +219,10 @@ public class BaseGameState : FlowStateBase
                     ControllingStateStack.ChangeState(new ErrorState("You failed to escape, you're doomed for eternity."));
                 }
             }
+
+            LoserCount.s_loserCount = 0;
+            WinnerCount.s_winnerCount = 0;
+            CleanUp();
         }
         
         Shader.SetGlobalVector("Vector3_94154db5f30644be99f99d0fb94af7da",m_globalBall.position);
@@ -237,6 +246,23 @@ public class BaseGameState : FlowStateBase
         if(m_powerUpData.m_secondsTotal > 0.0f)
         {
             m_baseGameUI.UpdatePowerUpBacking(m_powerUpData.m_secondsRemaining, m_powerUpData.m_secondsTotal);
+        }
+    }
+
+    private void CleanUp()
+    {
+        if(NetworkPlayerStatus.s_isHost)
+        {
+            m_playerCameraTrans.parent = null;
+            GameObject.Destroy(m_player.gameObject);
+
+            var powerUps = GameObject.FindObjectsOfType<PowerUpMono>();
+            foreach(var power in powerUps)
+            {
+                GameObject.Destroy(power.gameObject);
+            }
+
+            GameObject.Destroy(GameObject.FindObjectOfType<NetworkedPlayerInfo>().gameObject);
         }
     }
 
