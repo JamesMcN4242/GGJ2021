@@ -192,7 +192,6 @@ public class BaseGameState : FlowStateBase
 
         if (PhotonNetwork.CurrentRoom.PlayerCount != 1 && (LoserCount.s_loserCount + WinnerCount.s_winnerCount) == PhotonNetwork.CurrentRoom.PlayerCount - 1)
         {
-            Debug.Log("Seeker Wins");
             if (m_isSeeker)
             {
                 if (LoserCount.s_loserCount == 0)
@@ -223,6 +222,7 @@ public class BaseGameState : FlowStateBase
             LoserCount.s_loserCount = 0;
             WinnerCount.s_winnerCount = 0;
             CleanUp();
+            PhotonNetwork.LeaveRoom();
         }
         
         Shader.SetGlobalVector("Vector3_94154db5f30644be99f99d0fb94af7dae",m_globalBall.position);
