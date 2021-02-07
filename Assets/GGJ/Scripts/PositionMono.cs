@@ -15,6 +15,9 @@ public class PositionMono : MonoBehaviour, IPunObservable
     private float m_currentTime = 0;
     private float m_lag;
 
+    private Quaternion m_startRot;
+    private Quaternion m_endRot;
+    
     private PlayerAudioMovement m_audioMovement;
 
     public void Awake()
@@ -25,8 +28,11 @@ public class PositionMono : MonoBehaviour, IPunObservable
 
     public void LateUpdate()
     {
-        if(Mathf.Abs(m_lag) > 0)
-            transform.position = Vector3.Lerp(m_start, m_end, m_currentTime / m_lag);
+        if (Mathf.Abs(m_lag) > 0)
+        {
+            transform.position = Vector3.Lerp(m_start, m_end, m_currentTime / m_lag);   
+            transform.rotation = Quaternion.Slerp(m_startRot,m_endRot,m_currentTime/m_lag);
+        }
         m_currentTime += Time.deltaTime;
 
         m_animator.SetFloat("MovementSpeed", m_velocity.magnitude);
@@ -45,7 +51,8 @@ public class PositionMono : MonoBehaviour, IPunObservable
         {
             Vector3 position = (Vector3)stream.ReceiveNext();
             m_velocity = (Vector3) stream.ReceiveNext();
-            transform.rotation = (Quaternion)stream.ReceiveNext();
+            m_startRot = transform.rotation;
+            m_endRot = (Quaternion)stream.ReceiveNext();
 
             m_start = transform.position;
             m_lag = Mathf.Abs((float) (PhotonNetwork.Time - info.SentServerTime)) * 2f;
