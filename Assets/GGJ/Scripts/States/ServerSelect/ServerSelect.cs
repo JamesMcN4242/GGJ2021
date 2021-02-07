@@ -5,15 +5,23 @@ using Photon.Pun;
 using Photon.Realtime;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class ServerSelect : FlowStateBase
 {
     private UIServerSelect m_uiServerSelect;
     private float k_maxFadeTime = 1;
     private float m_currentTime = 0;
+    private Image m_curtain;
 
-    private int m_roomCount = 0;
+    enum NextState
+    {
+        MENU,
+        GAME,
+    }
 
+    private NextState m_nextState;
+    
     protected override void StartPresentingState()
     {
         if (PhotonNetwork.IsConnected)
@@ -25,15 +33,23 @@ public class ServerSelect : FlowStateBase
             m_uiServerSelect.OnDisconnect();
         }
 
+        m_curtain = m_uiServerSelect.transform.parent.Find("Curtain").GetComponent<Image>();
+
         PhotonNetwork.JoinLobby();
-        
-        EndPresentingState();
+    }
+
+    protected override void UpdatePresentingState()
+    {
+        m_currentTime += Time.deltaTime;
+        m_curtain.color = m_curtain.color.CopyWithA(1 - (m_currentTime / k_maxFadeTime));
+        if(m_currentTime/k_maxFadeTime > 1f)
+            EndPresentingState();
     }
 
     public override void OnRoomListUpdate(List<RoomInfo> roomList)
     {
-        m_roomCount = roomList.Count;
         m_uiServerSelect.UpdateRoomList(roomList);
+        RebuildObserverList();
     }
 
     protected override bool AquireUIFromScene()
@@ -51,10 +67,10 @@ public class ServerSelect : FlowStateBase
         {
             if (message is string msg)
             {
+                Debug.Log(msg);
                 if (msg.StartsWith("Room", StringComparison.Ordinal))
                 {
-                    PhotonNetwork.JoinRoom(msg); // todo: this is actually broke as shit, if 4 rooms exist and room 3 timesout the next room created will be room 4 which will be a duplicate. Need a better way of creating rooms...
-                    // Todo: Move to a new state or wait in this state until room joined?
+                    PhotonNetwork.JoinRoom(msg);
                 }
                 else
                 {
@@ -67,10 +83,11 @@ public class ServerSelect : FlowStateBase
                                 MaxPlayers = 5,
                                 IsOpen = true
                             };
-                            PhotonNetwork.JoinOrCreateRoom($"Room {m_roomCount + 1}", options, TypedLobby.Default);
+                            PhotonNetwork.JoinOrCreateRoom($"Room {System.Guid.NewGuid()}", options, TypedLobby.Default);
                             break;
                         case "BACK_TO_MENU":
                             ControllingStateStack.ChangeState(new MainMenuState());
+                            m_nextState = NextState.MENU;
                             break;
                     }   
                 }
@@ -85,7 +102,8 @@ public class ServerSelect : FlowStateBase
         if (m_currentTime > k_maxFadeTime)
         {
             EndDismissingState();
-            SceneManager.LoadScene("Game");
+            if(m_nextState == NextState.GAME)
+                SceneManager.LoadScene("Game");
         }
     }
 
@@ -115,5 +133,34 @@ public class ServerSelect : FlowStateBase
         Debug.Log("Left lobby");
     }
 
+    public override void OnJoinedRoom()
+    {
+        Debug.Log($"Joined room {PhotonNetwork.CurrentRoom.Name}");
+        m_currentTime = k_maxFadeTime;
+        EndActiveState();
+        m_nextState = NextState.GAME;
+    }
+
+    public override void OnJoinRoomFailed(short returnCode, string message)
+    {
+        string msg = $"Join Room Failed with code: {returnCode}\n{message}";
+        Debug.Log(msg);
+        ControllingStateStack.ChangeState(new ErrorState(msg));
+    }
+
+    public override void OnJoinRandomFailed(short returnCode, string message)
+    {
+        string msg = $"Join Room Failed with code: {returnCode}\n{message}";
+        Debug.Log(msg);
+        ControllingStateStack.ChangeState(new ErrorState(msg));;
+    }
+    
+    public override void OnLeftRoom()
+    {
+        string msg = $"Error: Unexpectedly Left Room: {PhotonNetwork.CurrentRoom.Name}.";
+        Debug.Log(msg);
+        ControllingStateStack.ChangeState(new ErrorState(msg));
+    }
+    
     #endregion
 }

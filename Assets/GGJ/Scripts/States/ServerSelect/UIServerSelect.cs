@@ -37,7 +37,8 @@ public class UIServerSelect : UIStateBase
         if (diff < 0)
         {
             var go = Instantiate(m_roomSelectPrefab);
-            m_scrollViewContent.SetParent(go.transform);
+            go.transform.SetParent(m_scrollViewContent,false);
+            go.transform.localScale = Vector3.one;
         }
         else if(diff > 0)
         {
@@ -52,7 +53,7 @@ public class UIServerSelect : UIStateBase
         for (int i = 0; i < roomList.Count; ++i)
         {
             var transform = m_scrollViewContent.GetChild(i);
-            transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text = $"{roomList[i].Name} {roomList[i].PlayerCount}/{roomList[i].MaxPlayers}";
+            transform.GetChild(0).GetComponent<TMPro.TMP_Text>().text = $"{roomList[i].Name} ({roomList[i].PlayerCount}/{roomList[i].MaxPlayers})";
             transform.GetChild(1).GetComponent<UIButtonInteraction>().m_message = roomList[i].Name;
         }
 

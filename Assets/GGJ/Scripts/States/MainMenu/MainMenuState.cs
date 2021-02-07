@@ -13,15 +13,37 @@ public class MainMenuState : FlowStateBase
 
     protected override void StartPresentingState()
     {
-        m_uiMainMenu.OnDisconnect();
+        if (PhotonNetwork.IsConnected)
+        {
+            m_uiMainMenu.OnConnected();
+        }
+        else
+        {
+            m_uiMainMenu.OnDisconnect();    
+        }
+
+        m_currentTime = 0;
         EndPresentingState();
+    }
+
+    protected override void UpdatePresentingState()
+    {
+        m_currentTime += Time.deltaTime;
+        m_uiMainMenu.SetCurtainAlpha(Mathf.Clamp01(1f - m_currentTime / k_maxFadeTime));
+        if (m_currentTime / k_maxFadeTime > 1f)
+        {
+            EndPresentingState();
+        }
     }
 
     protected override void StartActiveState()
     {
         Debug.Log("Initialising Connection with Photon!");
-        bool connected = PhotonNetwork.ConnectUsingSettings();
-        Debug.Assert(connected, "Can't Connect to photon!"); // todo: check this may be a bad idea to assert
+        if (PhotonNetwork.IsConnected == false)
+        {
+            bool connected = PhotonNetwork.ConnectUsingSettings();
+            Debug.Assert(connected, "Can't Connect to photon!"); // todo: check this may be a bad idea to assert    
+        }
     }
 
     protected override bool AquireUIFromScene()
@@ -42,7 +64,7 @@ public class MainMenuState : FlowStateBase
                 {
                     case "START":
                         m_currentTime = 0;
-                        EndActiveState();
+                        ControllingStateStack.ChangeState(new ServerSelect());
                         break;
                     case "QUIT":
                         Debug.Log("Application Quit!");
